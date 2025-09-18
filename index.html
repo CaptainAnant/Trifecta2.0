@@ -5,6 +5,44 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>EcoPlay — Gamified Environmental Learning</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Make Eco Points bigger and more visible */
+    .points {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #388e3c;
+      display: flex;
+      align-items: baseline;
+      gap: 0.5em;
+    }
+    .panel-top .muted.small {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #2e7d32;
+    }
+    /* Make levels section more prominent */
+    .levels {
+      margin: 1.5em 0;
+      padding: 1em;
+      background: #e8f5e9;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(56,142,60,0.08);
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: #388e3c;
+      text-align: center;
+    }
+    .level-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #388e3c;
+      margin-top: 0.2em;
+    }
+    /* Hide leaderboard card in sidebar */
+    .leaderboard-card {
+      display: none !important;
+    }
+  </style>
 </head>
 <body>
   <div class="scene" id="scene">
@@ -76,24 +114,23 @@
           <div class="panel-actions">
             <button class="btn" id="startQuiz">Take Quick Quiz</button>
             <button class="ghost" id="showTasks">My Tasks</button>
-            <button class="ghost" id="viewLeaderboard">Leaderboard</button>
+            <!-- Removed Leaderboard button -->
           </div>
         </div>
 
-        <div class="right-column">
-          <div class="card small">
-            <h3>Daily Challenge</h3>
-            <p class="muted">Plant 1 native sapling, photograph it and mark as done to earn 50 pts.</p>
-            <div class="row gap">
-              <button class="btn" id="claimDaily">Mark as Done</button>
-              <div class="muted small">Expires in: <span id="expires">2d 03:12</span></div>
-            </div>
+        <!-- Daily Challenge -->
+        <div class="card small">
+          <h3>Daily Challenge</h3>
+          <p class="muted">Plant 1 native sapling, photograph it and mark as complete to earn 50 pts.</p>
+          <div class="row gap">
+            <button class="btn" id="claimDaily">Complete Now</button>
+            <div class="muted small">Expires in: <span id="expires">2d 03:12</span></div>
           </div>
+        </div>
 
-          <div class="card small badges-card">
-            <h3>Badges</h3>
-            <div class="badges" id="badges"></div>
-          </div>
+        <div class="card small badges-card">
+          <h3>Badges</h3>
+          <div class="badges" id="badges"></div>
         </div>
       </div>
 
@@ -107,6 +144,7 @@
       <h3>Tasks & Missions</h3>
       <div class="task-list" id="taskList"></div>
 
+      <!-- Leaderboard card hidden via CSS, can remove this block if desired -->
       <div class="card small leaderboard-card">
         <h4>School Leaderboard</h4>
         <div class="leaderboard" id="leaderboard"></div>
