@@ -93,3 +93,88 @@ button.ghost{background:transparent;border:1px solid #e6f3ea;color:var(--accent)
   .hero h2{font-size:22px}
   .right-column{width:100%}
 }
+
+@media (max-width: 1024px) {
+  header, .container, .footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .header-right {
+    margin-top: 1rem;
+  }
+
+  .play-area {
+    flex-direction: column;
+  }
+
+  .panel-actions {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .right-column {
+    margin-top: 2rem;
+    width: 100%;
+  }
+
+  .activity-card {
+    margin-top: 2rem;
+  }
+
+  aside {
+    margin-top: 2rem;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .scene {
+    display: none; /* Hide decorative elements on smaller screens */
+  }
+
+  .brand {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .logo {
+    margin-bottom: 0.5rem;
+  }
+
+  .panel {
+    padding: 1rem;
+  }
+
+  .panel-actions button {
+    margin: 0.5rem 0;
+  }
+
+  .task-list, .leaderboard {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h2 {
+    font-size: 1.5rem;
+  }
+
+  .hero p {
+    font-size: 0.9rem;
+  }
+
+  .btn, .ghost {
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .small {
+    font-size: 0.75rem;
+  }
+
+  .footer {
+    font-size: 0.8rem;
+  }
+}
