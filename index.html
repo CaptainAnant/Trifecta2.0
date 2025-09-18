@@ -1,19 +1,137 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EcoPlay — Gamified Environmental Learning</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="scene" id="scene">
+    <!-- clouds -->
+    <svg class="cloud" id="cloud1" width="220" height="80" viewBox="0 0 220 80" style="left:8%;top:6%;transform:translateZ(0)">
+      <g fill="#ffffff">
+        <ellipse cx="60" cy="40" rx="40" ry="26"></ellipse>
+        <ellipse cx="95" cy="32" rx="28" ry="22"></ellipse>
+        <ellipse cx="130" cy="42" rx="40" ry="26"></ellipse>
+      </g>
+    </svg>
 
-    <h1>Hello Team</h1>
-    
+    <svg class="cloud" id="cloud2" width="300" height="110" viewBox="0 0 300 110" style="right:6%;top:12%">
+      <g fill="#ffffff">
+        <ellipse cx="60" cy="50" rx="45" ry="28"></ellipse>
+        <ellipse cx="125" cy="40" rx="36" ry="28"></ellipse>
+        <ellipse cx="190" cy="55" rx="50" ry="32"></ellipse>
+      </g>
+    </svg>
 
-    
-    <script src="script.js"></script>
+    <!-- plant -->
+    <svg class="plant" id="plant1" width="260" height="260" viewBox="0 0 260 260" style="left:0;bottom:-10%;">
+      <g>
+        <rect x="108" y="180" width="44" height="80" rx="8" fill="#6d4c41"></rect>
+        <ellipse cx="130" cy="120" rx="90" ry="70" fill="#81c784"></ellipse>
+        <ellipse cx="80" cy="100" rx="50" ry="30" fill="#66bb6a"></ellipse>
+        <ellipse cx="180" cy="100" rx="50" ry="30" fill="#66bb6a"></ellipse>
+      </g>
+    </svg>
+  </div>
+
+  <header>
+    <div class="brand">
+      <div class="logo">EP</div>
+      <div>
+        <h1>EcoPlay</h1>
+        <p class="sub">Learn. Act. Earn. — Gamified environmental learning for schools</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="school-meta">
+        <div class="school-name">School: Green Valley High</div>
+        <div class="school-sub">Eco-Club • Term 1</div>
+      </div>
+      <div class="avatar">👩‍🏫</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card hero">
+      <h2>Welcome, Student Leader 👋</h2>
+      <p>Complete real-world tasks, take quick quizzes, and climb the leaderboard. Points you earn translate into badges and school rewards.</p>
+
+      <div class="play-area">
+        <div class="panel">
+          <div class="panel-top">
+            <div>
+              <div class="muted small">Eco Points</div>
+              <div class="points"><div class="value" id="points">0</div><div class="small muted">pts</div></div>
+            </div>
+            <div class="text-right">
+              <div class="muted small">Current Level</div>
+              <div class="level-name" id="levelLabel">Seedling</div>
+            </div>
+          </div>
+
+          <div class="levels" id="levels"></div>
+
+          <div class="panel-actions">
+            <button class="btn" id="startQuiz">Take Quick Quiz</button>
+            <button class="ghost" id="showTasks">My Tasks</button>
+            <button class="ghost" id="viewLeaderboard">Leaderboard</button>
+          </div>
+        </div>
+
+        <div class="right-column">
+          <div class="card small">
+            <h3>Daily Challenge</h3>
+            <p class="muted">Plant 1 native sapling, photograph it and mark as done to earn 50 pts.</p>
+            <div class="row gap">
+              <button class="btn" id="claimDaily">Mark as Done</button>
+              <div class="muted small">Expires in: <span id="expires">2d 03:12</span></div>
+            </div>
+          </div>
+
+          <div class="card small badges-card">
+            <h3>Badges</h3>
+            <div class="badges" id="badges"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card activity-card">
+        <h3>Recent Activity</h3>
+        <pre id="activity" class="muted">No activity yet — start by taking a quiz or completing a task.</pre>
+      </div>
+    </section>
+
+    <aside class="card side">
+      <h3>Tasks & Missions</h3>
+      <div class="task-list" id="taskList"></div>
+
+      <div class="card small leaderboard-card">
+        <h4>School Leaderboard</h4>
+        <div class="leaderboard" id="leaderboard"></div>
+      </div>
+
+      <div class="card small">
+        <h4>Quick Tips</h4>
+        <ul class="muted small">
+          <li>Sort waste at source</li>
+          <li>Prefer native plants</li>
+          <li>Use refillable bottles</li>
+        </ul>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="card footer">
+    Built for NEP 2020 & SDGs • Schools: enable experiential learning for a greener tomorrow.
+  </footer>
+
+  <!-- modal -->
+  <div class="modal" id="modal">
+    <div class="modal-card" id="modalCard"></div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
