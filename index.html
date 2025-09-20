@@ -1,174 +1,39 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>EcoPlay — Gamified Environmental Learning</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trifecta2.0 | Gamified Environmental Education</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="style.css">
-  <style>
-    /* Make Eco Points bigger and more visible */
-    .points {
-      font-size: 3rem;
-      font-weight: bold;
-      color: #388e3c;
-      display: flex;
-      align-items: baseline;
-      gap: 0.5em;
-    }
-    .panel-top .muted.small {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #2e7d32;
-    }
-    /* Make levels section more prominent */
-    .levels {
-      margin: 1.5em 0;
-      padding: 1em;
-      background: #e8f5e9;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(56,142,60,0.08);
-      font-size: 1.2rem;
-      font-weight: 500;
-      color: #388e3c;
-      text-align: center;
-    }
-    .level-name {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #388e3c;
-      margin-top: 0.2em;
-    }
-    /* Hide leaderboard card in sidebar */
-    .leaderboard-card {
-      display: none !important;
-    }
-  </style>
 </head>
 <body>
-  <div class="scene" id="scene">
-    <!-- clouds -->
-    <svg class="cloud" id="cloud1" width="220" height="80" viewBox="0 0 220 80" style="left:8%;top:6%;transform:translateZ(0)">
-      <g fill="#ffffff">
-        <ellipse cx="60" cy="40" rx="40" ry="26"></ellipse>
-        <ellipse cx="95" cy="32" rx="28" ry="22"></ellipse>
-        <ellipse cx="130" cy="42" rx="40" ry="26"></ellipse>
-      </g>
-    </svg>
 
-    <svg class="cloud" id="cloud2" width="300" height="110" viewBox="0 0 300 110" style="right:6%;top:12%">
-      <g fill="#ffffff">
-        <ellipse cx="60" cy="50" rx="45" ry="28"></ellipse>
-        <ellipse cx="125" cy="40" rx="36" ry="28"></ellipse>
-        <ellipse cx="190" cy="55" rx="50" ry="32"></ellipse>
-      </g>
-    </svg>
-
-    <!-- plant -->
-    <svg class="plant" id="plant1" width="260" height="260" viewBox="0 0 260 260" style="left:0;bottom:-10%;">
-      <g>
-        <rect x="108" y="180" width="44" height="80" rx="8" fill="#6d4c41"></rect>
-        <ellipse cx="130" cy="120" rx="90" ry="70" fill="#81c784"></ellipse>
-        <ellipse cx="80" cy="100" rx="50" ry="30" fill="#66bb6a"></ellipse>
-        <ellipse cx="180" cy="100" rx="50" ry="30" fill="#66bb6a"></ellipse>
-      </g>
-    </svg>
-  </div>
-
-  <header>
-    <div class="brand">
-      <div class="logo">EP</div>
-      <div>
-        <h1>EcoPlay</h1>
-        <p class="sub">Learn. Act. Earn. — Gamified environmental learning for schools</p>
-      </div>
+  <nav class="navbar bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
     </div>
-    <div class="header-right">
-      <div class="school-meta">
-        <div class="school-name">School: Green Valley High</div>
-        <div class="school-sub">Eco-Club • Term 1</div>
-      </div>
-      <div class="avatar">👩‍🏫</div>
-    </div>
-  </header>
-
-  <main class="container">
-    <section class="card hero">
-      <h2>Welcome, Student Leader 👋</h2>
-      <p>Complete real-world tasks, take quick quizzes, and climb the leaderboard. Points you earn translate into badges and school rewards.</p>
-
-      <div class="play-area">
-        <div class="panel">
-          <div class="panel-top">
-            <div>
-              <div class="muted small">Eco Points</div>
-              <div class="points"><div class="value" id="points">0</div><div class="small muted">pts</div></div>
-            </div>
-            <div class="text-right">
-              <div class="muted small">Current Level</div>
-              <div class="level-name" id="levelLabel">Seedling</div>
-            </div>
-          </div>
-
-          <div class="levels" id="levels"></div>
-
-          <div class="panel-actions">
-            <button class="btn" id="startQuiz">Take Quick Quiz</button>
-            <button class="ghost" id="showTasks">My Tasks</button>
-            <!-- Removed Leaderboard button -->
-          </div>
-        </div>
-
-        <!-- Daily Challenge -->
-        <div class="card small">
-          <h3>Daily Challenge</h3>
-          <p class="muted">Plant 1 native sapling, photograph it and mark as complete to earn 50 pts.</p>
-          <div class="row gap">
-            <button class="btn" id="claimDaily">Complete Now</button>
-            <div class="muted small">Expires in: <span id="expires">2d 03:12</span></div>
-          </div>
-        </div>
-
-        <div class="card small badges-card">
-          <h3>Badges</h3>
-          <div class="badges" id="badges"></div>
-        </div>
-      </div>
-
-      <div class="card activity-card">
-        <h3>Recent Activity</h3>
-        <pre id="activity" class="muted">No activity yet — start by taking a quiz or completing a task.</pre>
-      </div>
-    </section>
-
-    <aside class="card side">
-      <h3>Tasks & Missions</h3>
-      <div class="task-list" id="taskList"></div>
-
-      <!-- Leaderboard card hidden via CSS, can remove this block if desired -->
-      <div class="card small leaderboard-card">
-        <h4>School Leaderboard</h4>
-        <div class="leaderboard" id="leaderboard"></div>
-      </div>
-
-      <div class="card small">
-        <h4>Quick Tips</h4>
-        <ul class="muted small">
-          <li>Sort waste at source</li>
-          <li>Prefer native plants</li>
-          <li>Use refillable bottles</li>
-        </ul>
-      </div>
-    </aside>
-  </main>
-
-  <footer class="card footer">
-    Built for NEP 2020 & SDGs • Schools: enable experiential learning for a greener tomorrow.
-  </footer>
-
-  <!-- modal -->
-  <div class="modal" id="modal">
-    <div class="modal-card" id="modalCard"></div>
   </div>
+</nav>
 
   <script src="script.js"></script>
 </body>
