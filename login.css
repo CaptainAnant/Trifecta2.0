@@ -1,4 +1,4 @@
- /* =================================================================== */
+/* =================================================================== */
  /* 1. BASE & RESET STYLES                                              */
  /* =================================================================== */
  :root {
@@ -96,15 +96,15 @@
  }
 
  .brand-title {
-     font-size: 3.5rem;
+     font-size: 4.0rem;
      font-weight: 700;
      margin-bottom: 0.5rem;
  }
 
  .brand-subtitle {
-     font-size: 1.1rem;
+     font-size: 1.5rem;
      font-weight: 400;
-     max-width: 400px;
+     max-width: 450px;
      margin: 0 auto 3rem auto;
      opacity: 0.9;
  }
@@ -117,7 +117,7 @@
 
  .stat-item {
      font-weight: 600;
-     font-size: 1.25rem;
+     font-size: 1.6rem;
  }
 
  .stat-item span {
@@ -184,7 +184,7 @@
      width: 100%;
      padding: 0.9rem;
      border: none;
-     border-radius: 10px;
+     border-radius: px;
      background: linear-gradient(45deg, var(--dark-green), var(--primary-green));
      color: var(--white);
      font-size: 1rem;
@@ -203,10 +203,11 @@
  }
 
  .submit-btn svg {
-     width: 20px;
-     height: 20px;
+   width: 24px; /* Adjusted size for the eco/leaf icon */
+   height: 24px;
  }
 
+ /* Add specific styles for the eco/leaf icon if needed */
  .card-footer-text {
      text-align: center;
      font-size: 0.85rem;
@@ -269,3 +270,51 @@
          /* Allow scrolling on mobile */
      }
  }
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+/* Keyframes for smoother and more pronounced floating animation */
+@keyframes floatUpDown {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-15px);
+  }
+  75% {
+    transform: translateY(15px);
+  }
+}
+
+@keyframes floatDownUp {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(15px);
+  }
+  75% {
+    transform: translateY(-15px);
+  }
+}
+
+/* Apply updated animation to icons */
+.logo-icons .material-symbols-outlined:nth-child(1) {
+  animation: floatUpDown 4s infinite ease-in-out;
+}
+
+.logo-icons .material-symbols-outlined:nth-child(3) {
+  animation: floatDownUp 4s infinite ease-in-out;
+}
+
+.logo-icons .material-symbols-outlined {
+  font-size: 40px; /* Existing size */
+  margin: 0 0.5rem; /* Increased spacing */
+}
+
