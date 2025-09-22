@@ -1,348 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EcoLearn | Login</title>
-  <!-- Google Fonts - Poppins -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    /* =================================================================== */
-    /* 1. BASE & RESET STYLES                                              */
-    /* =================================================================== */
-    :root {
-      --primary-green: #3FAA7E;
-      --dark-green: #37956F;
-      --light-green-bg: #E7F5EF;
-      --white: #FFFFFF;
-      --text-dark: #333333;
-      --text-light: #6c757d;
-      --border-color: #e0e0e0;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoLearn | Login</title>
+    <!-- Google Fonts - Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html, body {
-      height: 100%;
-      font-family: 'Poppins', sans-serif;
-      overflow: hidden; /* Prevents scrollbars from layout shift */
-    }
-
-    /* =================================================================== */
-    /* 2. MAIN LAYOUT                                                      */
-    /* =================================================================== */
-    .page-container {
-      display: flex;
-      width: 100%;
-      height: 100%;
-    }
-
-    .left-panel, .right-panel {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-      position: relative;
-    }
-
-    .left-panel {
-      flex-basis: 58%;
-      background: linear-gradient(135deg, var(--dark-green), var(--primary-green));
-      color: var(--white);
-    }
-
-    .right-panel {
-      flex-basis: 42%;
-      background: linear-gradient(135deg, var(--primary-green), #68c096);
-    }
-    
-    /* =================================================================== */
-    /* 3. LEFT PANEL STYLES                                                */
-    /* =================================================================== */
-    .background-shape {
-      position: absolute;
-      opacity: 0.1;
-      pointer-events: none;
-    }
-    
-    .shape-1 {
-      bottom: -50px;
-      left: -50px;
-      width: 300px;
-      height: 300px;
-    }
-
-    .shape-2 {
-      top: -20px;
-      right: -80px;
-      width: 250px;
-      height: 250px;
-      transform: scaleX(-1);
-    }
-    
-    .left-content {
-      text-align: center;
-      z-index: 1;
-    }
-
-    .logo-icons {
-      margin-bottom: 1rem;
-    }
-
-    .logo-icons svg {
-      width: 32px;
-      height: 32px;
-      margin: 0 0.5rem;
-    }
-
-    .brand-title {
-      font-size: 3.5rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    .brand-subtitle {
-      font-size: 1.1rem;
-      font-weight: 400;
-      max-width: 400px;
-      margin: 0 auto 3rem auto;
-      opacity: 0.9;
-    }
-
-    .stats-container {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-    }
-
-    .stat-item {
-      font-weight: 600;
-      font-size: 1.25rem;
-    }
-
-    .stat-item span {
-      display: block;
-      font-weight: 400;
-      font-size: 0.9rem;
-      opacity: 0.8;
-    }
-
-    /* =================================================================== */
-    /* 4. RIGHT PANEL & LOGIN CARD STYLES                                  */
-    /* =================================================================== */
-    .login-card {
-      background: var(--white);
-      padding: 2.5rem;
-      border-radius: 20px;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 400px;
-    }
-    
-    .card-title {
-      font-size: 1.75rem;
-      font-weight: 600;
-      color: var(--text-dark);
-      margin-bottom: 0.5rem;
-    }
-
-    .card-subtitle {
-      font-size: 0.95rem;
-      color: var(--text-light);
-      margin-bottom: 2rem;
-    }
-
-    .form-group {
-      margin-bottom: 1.25rem;
-    }
-
-    .form-group label {
-      display: block;
-      font-weight: 500;
-      font-size: 0.9rem;
-      color: var(--text-dark);
-      margin-bottom: 0.5rem;
-    }
-    
-    .form-input {
-      width: 100%;
-      padding: 0.8rem 1rem;
-      border: 1px solid var(--border-color);
-      border-radius: 10px;
-      font-size: 1rem;
-      font-family: 'Poppins', sans-serif;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    .form-input:focus {
-      outline: none;
-      border-color: var(--primary-green);
-      box-shadow: 0 0 0 3px var(--light-green-bg);
-    }
-    
-    .submit-btn {
-      width: 100%;
-      padding: 0.9rem;
-      border: none;
-      border-radius: 10px;
-      background: linear-gradient(45deg, var(--dark-green), var(--primary-green));
-      color: var(--white);
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    
-    .submit-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(55, 149, 111, 0.3);
-    }
-
-    .submit-btn svg {
-      width: 20px;
-      height: 20px;
-    }
-    
-    .card-footer-text {
-      text-align: center;
-      font-size: 0.85rem;
-      color: var(--text-light);
-      margin-top: 1.5rem;
-    }
-
-    .card-footer-text a {
-      color: var(--primary-green);
-      font-weight: 600;
-      text-decoration: none;
-    }
-    
-    .card-footer-text.agreement {
-      font-size: 0.75rem;
-      margin-top: 1rem;
-    }
-    
-    /* =================================================================== */
-    /* 5. RESPONSIVE STYLES                                                */
-    /* =================================================================== */
-    @media (max-width: 900px) {
-      .page-container {
-        flex-direction: column;
-      }
-      .left-panel, .right-panel {
-        flex-basis: auto;
-      }
-      .left-panel {
-        height: 50vh;
-        min-height: 400px;
-      }
-      .right-panel {
-        height: auto;
-        justify-content: flex-start;
-        background: var(--white); /* Change background for mobile scroll */
-      }
-      .login-card {
-        box-shadow: none;
-        border-radius: 0;
-        margin-top: -2rem; /* Pull card up */
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
-        z-index: 10;
-      }
-      .brand-title {
-        font-size: 2.5rem;
-      }
-      body {
-        overflow: auto; /* Allow scrolling on mobile */
-      }
-    }
-  </style>
 </head>
+
 <body>
-  <div class="page-container">
-    
-    <!-- =================================================================== -->
-    <!-- LEFT INFO PANEL                                                   -->
-    <!-- =================================================================== -->
-    <div class="left-panel">
-      <!-- Background SVG Shapes -->
-      <svg class="background-shape shape-1" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#FFF" d="M48.1,-58.5C62.5,-49.2,74.5,-35.1,76.5,-19.9C78.5,-4.7,70.5,11.7,62,27.3C53.5,42.9,44.5,57.7,30.8,66.4C17.1,75.1,-1.2,77.7,-19.3,73.1C-37.3,68.5,-55.1,56.7,-64.8,40.9C-74.5,25.1,-76.1,5.3,-71.4,-11.9C-66.7,-29.1,-55.7,-43.7,-42,-53.6C-28.3,-63.5,-11.9,-68.7,3.1,-70.6C18.1,-72.5,33.7,-67.8,48.1,-58.5Z" transform="translate(100 100)"></path></svg>
-      <svg class="background-shape shape-2" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><path fill="#FFF" d="M48.1,-58.5C62.5,-49.2,74.5,-35.1,76.5,-19.9C78.5,-4.7,70.5,11.7,62,27.3C53.5,42.9,44.5,57.7,30.8,66.4C17.1,75.1,-1.2,77.7,-19.3,73.1C-37.3,68.5,-55.1,56.7,-64.8,40.9C-74.5,25.1,-76.1,5.3,-71.4,-11.9C-66.7,-29.1,-55.7,-43.7,-42,-53.6C-28.3,-63.5,-11.9,-68.7,3.1,-70.6C18.1,-72.5,33.7,-67.8,48.1,-58.5Z" transform="translate(100 100)"></path></svg>
+    <div class="page-container">
 
-      <div class="left-content">
-        <div class="logo-icons">
-          <!-- Leaf Icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22L6.66 19.7C7.14 18.47 7.9 17.6 9 17.21C9.42 17.04 9.87 16.95 10.33 16.95C11.53 16.95 12.69 17.43 13.5 18.23L14.71 19.44L16.12 18.03L14.91 16.82C14.5 16.41 14.12 15.83 14.06 15.17C13.93 13.84 14.92 12.74 16.24 12.55C17.61 12.35 18.88 13.25 19.16 14.63C19.29 15.3 19.15 16 18.77 16.6L17.36 18.01L18.77 19.42L21.59 16.6C20.4 13.2 17 8 17 8Z"></path></svg>
-          <!-- Tree Icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10,21V18H3L8,13H5L10,8H7L12,3L17,8H14L19,13H16L21,18H14V21H10Z"></path></svg>
+        <!-- =================================================================== -->
+        <!-- LEFT INFO PANEL                                                   -->
+        <!-- =================================================================== -->
+        <div class="left-panel">
+            <!-- Background SVG Shapes -->
+            <svg class="background-shape shape-1" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#FFF"
+                    d="M48.1,-58.5C62.5,-49.2,74.5,-35.1,76.5,-19.9C78.5,-4.7,70.5,11.7,62,27.3C53.5,42.9,44.5,57.7,30.8,66.4C17.1,75.1,-1.2,77.7,-19.3,73.1C-37.3,68.5,-55.1,56.7,-64.8,40.9C-74.5,25.1,-76.1,5.3,-71.4,-11.9C-66.7,-29.1,-55.7,-43.7,-42,-53.6C-28.3,-63.5,-11.9,-68.7,3.1,-70.6C18.1,-72.5,33.7,-67.8,48.1,-58.5Z"
+                    transform="translate(100 100)"></path>
+            </svg>
+            <svg class="background-shape shape-2" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#FFF"
+                    d="M48.1,-58.5C62.5,-49.2,74.5,-35.1,76.5,-19.9C78.5,-4.7,70.5,11.7,62,27.3C53.5,42.9,44.5,57.7,30.8,66.4C17.1,75.1,-1.2,77.7,-19.3,73.1C-37.3,68.5,-55.1,56.7,-64.8,40.9C-74.5,25.1,-76.1,5.3,-71.4,-11.9C-66.7,-29.1,-55.7,-43.7,-42,-53.6C-28.3,-63.5,-11.9,-68.7,3.1,-70.6C18.1,-72.5,33.7,-67.8,48.1,-58.5Z"
+                    transform="translate(100 100)"></path>
+            </svg>
+
+            <div class="left-content">
+                <div class="logo-icons">
+                    <!-- Leaf Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22L6.66 19.7C7.14 18.47 7.9 17.6 9 17.21C9.42 17.04 9.87 16.95 10.33 16.95C11.53 16.95 12.69 17.43 13.5 18.23L14.71 19.44L16.12 18.03L14.91 16.82C14.5 16.41 14.12 15.83 14.06 15.17C13.93 13.84 14.92 12.74 16.24 12.55C17.61 12.35 18.88 13.25 19.16 14.63C19.29 15.3 19.15 16 18.77 16.6L17.36 18.01L18.77 19.42L21.59 16.6C20.4 13.2 17 8 17 8Z">
+                        </path>
+                    </svg>
+                    <!-- Tree Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10,21V18H3L8,13H5L10,8H7L12,3L17,8H14L19,13H16L21,18H14V21H10Z"></path>
+                    </svg>
+                </div>
+                <h1 class="brand-title">EcoLearn</h1>
+                <p class="brand-subtitle">Gamified Environmental Education for a Sustainable Future</p>
+                <div class="stats-container">
+                    <div class="stat-item">10K+ <span>Students</span></div>
+                    <div class="stat-item">500+ <span>Schools</span></div>
+                    <div class="stat-item">50K+ <span>Trees Planted</span></div>
+                </div>
+            </div>
         </div>
-        <h1 class="brand-title">EcoLearn</h1>
-        <p class="brand-subtitle">Gamified Environmental Education for a Sustainable Future</p>
-        <div class="stats-container">
-          <div class="stat-item">10K+ <span>Students</span></div>
-          <div class="stat-item">500+ <span>Schools</span></div>
-          <div class="stat-item">50K+ <span>Trees Planted</span></div>
+
+        <!-- =================================================================== -->
+        <!-- RIGHT LOGIN PANEL                                                 -->
+        <!-- =================================================================== -->
+        <div class="right-panel">
+            <div class="login-card">
+                <h2 class="card-title">Welcome Back! 👋</h2>
+                <p class="card-subtitle">Continue your journey to make India greener</p>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input class="form-input" type="email" id="email" placeholder="your.email@school.edu" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input class="form-input" type="password" id="password" placeholder="Enter your password"
+                            required>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <!-- Sign In Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M10,17V14H3V10H10V7L15,12L10,17M21,12L17,16V13H7V11H17V8L21,12Z"></path>
+                        </svg>
+                        Sign In
+                    </button>
+                </form>
+                <p class="card-footer-text">Don't have an account? <a href="#">Join EcoLearn</a></p>
+                <p class="card-footer-text agreement">By signing in, you agree to our commitment to environmental
+                    education</p>
+            </div>
         </div>
-      </div>
+
     </div>
-
-    <!-- =================================================================== -->
-    <!-- RIGHT LOGIN PANEL                                                 -->
-    <!-- =================================================================== -->
-    <div class="right-panel">
-      <div class="login-card">
-        <h2 class="card-title">Welcome Back! 👋</h2>
-        <p class="card-subtitle">Continue your journey to make India greener</p>
-        <form id="loginForm">
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input class="form-input" type="email" id="email" placeholder="your.email@school.edu" required>
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input class="form-input" type="password" id="password" placeholder="Enter your password" required>
-          </div>
-          <button type="submit" class="submit-btn">
-            <!-- Sign In Icon -->
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M10,17V14H3V10H10V7L15,12L10,17M21,12L17,16V13H7V11H17V8L21,12Z"></path></svg>
-            Sign In
-          </button>
-        </form>
-        <p class="card-footer-text">Don't have an account? <a href="#">Join EcoLearn</a></p>
-        <p class="card-footer-text agreement">By signing in, you agree to our commitment to environmental education</p>
-      </div>
-    </div>
-
-  </div>
-
-  <script>
-    // Handle Login Form Submission (Placeholder for database integration)
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the form from submitting normally
-        
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        
-        // Log the data to the console
-        console.log('--- Login Attempt ---');
-        console.log('Email:', email);
-        console.log('Password:', password); // In a real app, never log passwords!
-        
-        // This is where you would add your database/Firebase logic
-        alert('Login attempt captured in the console. Ready for integration!');
-    });
-  </script>
 </body>
-</html>
 
+</html>
