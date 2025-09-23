@@ -184,6 +184,14 @@ html, body { height: 100%; font-family: 'Poppins', sans-serif; overflow: hidden;
   text-align: center; /* Ensure text is centered */
 }
 
+#LoginLink:hover {
+  color: darkgreen;
+}
+
+#toggleToSignUp:hover {
+  color: darkgreen;
+}
+
 /* Keyframes for floating animation */
 @keyframes floatUpDown {
   0%, 100% {
