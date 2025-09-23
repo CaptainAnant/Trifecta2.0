@@ -1,102 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoLearn | Login</title>
-    <link rel="stylesheet" href="login.css">
-    <!-- Google Fonts - Poppins -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoLearn | Login</title>
+  <link rel="stylesheet" href="login.css">
+  <!-- Google Fonts - Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
-
 <body>
-    <div class="page-container">
-        <!-- Add animated leaves container -->
-        <div class="animated-leaves">
-            <span class="leaf"></span>
-            <span class="leaf"></span>
-            <span class="leaf"></span>
-            <span class="leaf"></span>
+  <div class="page-container">
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+      <div class="left-content">
+        <div class="logo-icons">
+          <span class="material-symbols-outlined">eco</span>
+          <span class="material-symbols-outlined">forest</span>
+          <span class="material-symbols-outlined">grass</span>
         </div>
-
-        <!-- =================================================================== -->
-        <!-- LEFT INFO PANEL                                                   -->
-        <!-- =================================================================== -->
-        <div class="left-panel">
-            <!-- Background SVG Shapes -->
-            <svg class="background-shape shape-1" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <path fill="#FFF"
-                    d="M48.1,-58.5C62.5,-49.2,74.5,-35.1,76.5,-19.9C78.5,-4.7,70.5,11.7,62,27.3C53.5,42.9,44.5,57.7,30.8,66.4C17.1,75.1,-1.2,77.7,-19.3,73.1C-37.3,68.5,-55.1,56.7,-64.8,40.9C-74.5,25.1,-76.1,5.3,-71.4,-11.9C-66.7,-29.1,-55.7,-43.7,-42,-53.6C-28.3,-63.5,-11.9,-68.7,3.1,-70.6C18.1,-72.5,33.7,-67.8,48.1,-58.5Z"
-                    transform="translate(100 100)"></path>
-            </svg>
-            <svg class="background-shape shape-2" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                <path fill="#FFF"
-                    d="M48.1,-58.5C62.5,-49.2,74.5,-35.1,76.5,-19.9C78.5,-4.7,70.5,11.7,62,27.3C53.5,42.9,44.5,57.7,30.8,66.4C17.1,75.1,-1.2,77.7,-19.3,73.1C-37.3,68.5,-55.1,56.7,-64.8,40.9C-74.5,25.1,-76.1,5.3,-71.4,-11.9C-66.7,-29.1,-55.7,-43.7,-42,-53.6C-28.3,-63.5,-11.9,-68.7,3.1,-70.6C18.1,-72.5,33.7,-67.8,48.1,-58.5Z"
-                    transform="translate(100 100)"></path>
-            </svg>
-            
-
-            <div class="left-content">
-                <div class="logo-icons">
-                    <!-- Leaf Icon -->
-                    <span class="material-symbols-outlined">
-                        eco
-                    </span>
-                    <!-- Tree Icon -->
-                    <span class="material-symbols-outlined">
-                        forest
-                    </span>
-                    <!-- Grass Icon -->
-                    <span class="material-symbols-outlined">
-                        grass
-                    </span>
-                </div>
-                <h1 class="brand-title">EcoLearn</h1>
-                <p class="brand-subtitle">Gamified Environmental Education for a Sustainable Future</p>
-                <div class="stats-container">
-                    <div class="stat-item">1K+ <span>Students</span></div>
-                    <div class="stat-item">20+ <span>Schools</span></div>
-                    <div class="stat-item">50+ <span>Trees Planted</span></div>
-                </div>
-            </div>
+        <h1 class="brand-title">EcoLearn</h1>
+        <p class="brand-subtitle">Gamified Environmental Education for a Sustainable Future</p>
+        <div class="stats-container">
+          <div class="stat-item">1K+ <span>Students</span></div>
+          <div class="stat-item">20+ <span>Schools</span></div>
+          <div class="stat-item">50+ <span>Trees Planted</span></div>
         </div>
-
-        <!-- =================================================================== -->
-        <!-- RIGHT LOGIN PANEL                                                 -->
-        <!-- =================================================================== -->
-        <div class="right-panel">
-            <div class="login-card">
-                <h2 class="card-title">Welcome Back! 👋</h2>
-                <p class="card-subtitle">Continue your journey to make India greener</p>
-                <form id="loginForm">
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input class="form-input" type="email" id="email" placeholder="your.email@school.edu" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input class="form-input" type="password" id="password" placeholder="Enter your password"
-                            required>
-                    </div>
-                    <button type="submit" class="submit-btn">
-                        <!-- Replace arrow icon with eco/leaf icon -->
-                        <span class="material-symbols-outlined">eco</span>
-                        Sign In
-                    </button>
-                </form>
-                <p class="card-footer-text">Don't have an account? <a href="#">Join EcoLearn</a></p>
-                <p class="card-footer-text agreement">By signing in, you agree to our commitment to environmental
-                    education</p>
-            </div>
-        </div>
-
+      </div>
     </div>
 
-    <script src="login.js"></script>
-</body>
+    <!-- RIGHT PANEL -->
+    <div class="right-panel">
+      <div class="login-card" id="authCard">
+        <h2 class="card-title" id="cardTitle">Welcome Back! 👋</h2>
+        <p class="card-subtitle" id="cardSubtitle">Continue your journey to make India greener</p>
+        
+        <!-- Form -->
+        <form id="authForm">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input class="form-input" type="email" id="email" placeholder="your.email@school.edu" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input class="form-input" type="password" id="password" placeholder="Enter your password" required>
+          </div>
+          <button type="submit" class="submit-btn">
+            <span class="material-symbols-outlined">eco</span> Log In
+          </button>
+        </form>
 
+        <p class="card-footer-text" id="authFooter">
+          Don't have an account? <a href="#" id="toggleToSignUp">Join EcoLearn</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <script src="login.js"></script>
+</body>
 </html>
