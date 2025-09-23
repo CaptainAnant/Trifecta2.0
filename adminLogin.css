@@ -1,11 +1,12 @@
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(to right, #2c3e50, #3498db);
+  background: linear-gradient(135deg, #37956F, #3FAA7E); /* Dark green to primary green */
+  color: #FFFFFF; /* Ensure text is readable */
   height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 .login-wrapper {
@@ -68,6 +69,23 @@ button:hover {
   background-color: #2980b9;
 }
 
+button[type="submit"] {
+  background: linear-gradient(45deg, #37956F, #3FAA7E); /* Dark green to primary green */
+  color: #FFFFFF; /* White text for contrast */
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(55, 149, 111, 0.3); /* Subtle shadow on hover */
+}
+
 #errorMsg {
   color: red;
   margin-top: 1rem;
@@ -85,4 +103,34 @@ button:hover {
 .material-symbols-outlined {
   font-size: 48px;
   color: var(--primary-green, #3FAA7E);
+}
+
+/* Style for the select dropdown */
+#role {
+  background: #FFFFFF; /* White background */
+  border: 1px solid var(--border-color, #e0e0e0);
+  border-radius: 8px;
+  padding: 0.6rem;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Hover effect for the select dropdown */
+#role:hover {
+  border-color: var(--primary-green, #3FAA7E); /* Green border on hover */
+  box-shadow: 0 0 5px rgba(63, 170, 126, 0.5); /* Subtle green glow */
+}
+
+/* Style for the dropdown options */
+#role option {
+  background: #FFFFFF; /* White background for options */
+  color: var(--text-dark, #333333); /* Dark text for readability */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hover effect for dropdown options */
+#role option:hover {
+  background: var(--primary-green, #3FAA7E); /* Green background on hover */
+  color: #FFFFFF; /* White text on hover */
 }
