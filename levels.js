@@ -57,3 +57,17 @@ window.addEventListener('scroll', () => {
     navbar.classList.remove('scrolled');
   }
 });
+
+// Update page-header container with selected topic
+const topicLinks = document.querySelectorAll('.dropdown-menu a');
+const topicTitle = document.getElementById('topicTitle');
+
+topicLinks.forEach(link => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+    const selectedTopic = link.getAttribute('data-topic');
+    if (selectedTopic) {
+      topicTitle.textContent = selectedTopic;
+    }
+  });
+});
