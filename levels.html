@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EcoLearn | Climate Change Levels</title>
+  <!-- Google Fonts - Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* =================================================================== */
+    /* 1. THEME & CONSTANT EFFECTS                                         */
+    /* =================================================================== */
+    :root {
+      --primary-green: #4CAF50;
+      --dark-green: #388E3C;
+      --light-green-bg: #E7F5EF;
+      --path-color: #d2b48c; /* Sandy path color */
+      --white: #FFFFFF;
+      --sky-color: #5D6D7E;
+      --grass-color: #556B2F;
+      --text-dark: #333333;
+      --text-light: #6c757d;
+      --locked-color: #a0aec0;
+      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--sky-color);
+      color: var(--text-dark);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+    .btn-secondary { display: inline-block; padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 500; cursor: pointer; background-color: var(--light-green-bg); color: var(--dark-green); border: 1px solid var(--dark-green); transition: all 0.2s ease-in-out; }
+    .btn-secondary:hover { background-color: var(--dark-green); color: var(--white); }
+
+    /* =================================================================== */
+    /* 2. NAVBAR (Consistent with index.html)                             */
+    /* =================================================================== */
+    .navbar { background-color: var(--white); box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 1000; padding: 1rem 0; }
+    .nav-container { display: flex; justify-content: space-between; align-items: center; }
+    .nav-logo { font-size: 1.75rem; font-weight: 700; color: #3FAA7E; flex-shrink: 0; }
+    .nav-links { display: flex; align-items: center; gap: 1.5rem; }
+    .nav-item { font-weight: 500; font-size: 1rem; color: var(--text-light); position: relative; padding: 0.5rem 0; cursor: pointer; transition: color 0.2s ease; }
+    .nav-item:hover { color: #3FAA7E; }
+    .dropdown { position: relative; }
+    .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background-color: var(--white); border-radius: 8px; box-shadow: var(--shadow-md); list-style: none; padding: 0.5rem 0; min-width: 160px; z-index: 101; opacity: 0; transform: translateY(10px); transition: opacity 0.2s ease, transform 0.2s ease; }
+    .dropdown-menu a { display: block; padding: 0.75rem 1.25rem; color: var(--text-dark); }
+    .dropdown-menu a:hover { background-color: var(--light-green-bg); color: #3FAA7E; }
+    .dropdown.active .dropdown-menu { display: block; opacity: 1; transform: translateY(0); }
+    .nav-profile { display: flex; align-items: center; gap: 0.75rem; font-weight: 500; }
+    .profile-icon { width: 40px; height: 40px; border-radius: 50%; background-color: #3FAA7E; display: flex; align-items: center; justify-content: center; color: var(--white); font-weight: 600; }
+
+    /* =================================================================== */
+    /* 3. MAIN LEVEL MAP SECTION                                           */
+    /* =================================================================== */
+    .main-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+      background: linear-gradient(to bottom, var(--sky-color) 0%, #82a37c 50%, var(--grass-color) 100%);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .page-header { text-align: center; margin-bottom: 1rem; position: relative; z-index: 5; }
+    .page-header h1 {
+        font-family: 'Arial Black', Gadget, sans-serif;
+        font-size: 3rem;
+        color: var(--white);
+        text-transform: uppercase;
+        text-shadow: -2px -2px 0 #444, 2px -2px 0 #444, -2px 2px 0 #444, 2px 2px 0 #444, 4px 4px 5px rgba(0,0,0,0.5);
+    }
+    .page-header p { display: none; }
+
+    .vertical-level-map {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+      height: 600px;
+      margin-top: 1rem;
+    }
+
+    .level-path-svg {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 100%;
+      width: 100%;
+      z-index: 1;
+    }
+    .level-path-svg path {
+        stroke: var(--path-color);
+        stroke-width: 20;
+        stroke-linecap: round;
+        filter: drop-shadow(0 4px 2px rgba(0,0,0,0.2));
+    }
+
+    .level-entry {
+      position: absolute;
+      z-index: 2;
+    }
+    
+    #level-entry-1 { top: 460px; left: 60px; }
+    #level-entry-2 { top: 220px; left: 280px; }
+    #level-entry-3 { top: 20px; left: 120px; }
+
+    .level-node {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background-color: var(--primary-green);
+        color: var(--white);
+        border: 5px solid var(--dark-green);
+        box-shadow: inset 0 0 10px rgba(0,0,0,0.3), var(--shadow-md);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        cursor: pointer;
+    }
+    .level-node.unlocked:hover {
+        transform: scale(1.1);
+        box-shadow: inset 0 0 10px rgba(0,0,0,0.3), 0 15px 25px -5px rgba(0,0,0,0.25);
+    }
+    .level-node.locked {
+        background-color: var(--locked-color);
+        border-color: #718096;
+        cursor: not-allowed;
+    }
+    .level-node .level-number {
+        font-family: 'Arial Black', Gadget, sans-serif;
+        font-size: 3rem;
+        font-weight: 700;
+        line-height: 1;
+        text-shadow: 2px 2px 3px rgba(0,0,0,0.4);
+    }
+    
+    .decorative-element {
+        position: absolute;
+        z-index: 0;
+        pointer-events: none;
+    }
+
+    .cloud { top: 5%; left: 10%; width: 150px; opacity: 0.8; }
+    .cloud.c2 { top: 15%; left: 70%; width: 120px; opacity: 0.7; }
+    .tree { top: 450px; left: 280px; width: 180px; z-index: 3; }
+    .tree.t2 { top: 180px; left: 10px; width: 150px; z-index: 0;}
+
+
+    /* =================================================================== */
+    /* 4. FOOTER (Consistent with index.html)                              */
+    /* =================================================================== */
+    .footer { background-color: var(--white); border-top: 1px solid var(--border-color); padding: 1.5rem 0; }
+    .footer-container { display: flex; justify-content: space-between; align-items: center; }
+    .footer-logo { font-size: 1.5rem; font-weight: 700; color: #3FAA7E; }
+    .footer-copyright { color: var(--text-light); }
+    
+    /* =================================================================== */
+    /* 5. RESPONSIVENESS                                                   */
+    /* =================================================================== */
+    @media (max-width: 992px) {
+      .nav-links { gap: 0.75rem; overflow-x: auto; padding-bottom: 5px; }
+      .nav-item { font-size: 0.9rem; white-space: nowrap; }
+      .nav-profile span { display: none; }
+    }
+    @media (max-width: 768px) {
+      .footer-container { flex-direction: column; gap: 1rem; }
+      .page-header h1 { font-size: 2.5rem; }
+    }
+    @media (max-width: 500px) {
+        .vertical-level-map { transform: scale(0.8); margin-top: -50px;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="nav-logo">EcoLearn</a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#" class="nav-item">Dashboard</a>
+        <div class="nav-item dropdown" id="topicsDropdown">
+          <span>Topics ▼</span>
+          <ul class="dropdown-menu">
+            <li><a href="#">T1 - Climate Change</a></li>
+            <li><a href="#">T2 - Pollution</a></li>
+            <li><a href="#">T3 - Deforestation</a></li>
+            <li><a href="#">T4 - Water Scarcity</a></li>
+            <li><a href="#">T5 - Biodiversity</a></li>
+            <li><a href="#">T6 - Waste Management</a></li>
+          </ul>
+        </div>
+        <a href="#" class="nav-item">LeaderBoard</a>
+        <a href="#" class="nav-item">My Badges</a>
+      </nav>
+      <div class="nav-profile">
+        <div class="profile-icon">P</div>
+        <span>Profile</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-section">
+    <div class="page-header container">
+      <h1>Climate Change</h1>
+    </div>
+
+    <div class="vertical-level-map">
+      <!-- Decorative Scenery -->
+      <svg class="decorative-element cloud" viewBox="0 0 103 63" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M101.455 45.4242C106.024 37.123 100.23 26.837 91.5901 24.2125C88.2452 10.4533 74.839 -0.404241 60.5458 0.0457591C46.2525 0.520759 34.6184 11.203 31.8447 24.6625C31.5947 24.5875 31.3447 24.5375 31.0702 24.5125C20.6415 23.4125 11.2464 31.5136 10.7464 41.8742C10.2464 52.2348 18.4705 61.4355 28.8742 61.4355H31.0702H73.0459H96.955C102.049 61.4355 106.182 57.0289 105.707 51.8742C105.232 46.7442 101.455 45.4242 101.455 45.4242Z" fill="white" fill-opacity="0.9"/></svg>
+      <svg class="decorative-element cloud c2" viewBox="0 0 103 63" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M101.455 45.4242C106.024 37.123 100.23 26.837 91.5901 24.2125C88.2452 10.4533 74.839 -0.404241 60.5458 0.0457591C46.2525 0.520759 34.6184 11.203 31.8447 24.6625C31.5947 24.5875 31.3447 24.5375 31.0702 24.5125C20.6415 23.4125 11.2464 31.5136 10.7464 41.8742C10.2464 52.2348 18.4705 61.4355 28.8742 61.4355H31.0702H73.0459H96.955C102.049 61.4355 106.182 57.0289 105.707 51.8742C105.232 46.7442 101.455 45.4242 101.455 45.4242Z" fill="white" fill-opacity="0.9"/></svg>
+      <svg class="decorative-element tree" viewBox="0 0 165 210" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="71" y="117" width="24" height="93" rx="4" fill="#795548"/><path d="M83 23C37.15 23 0 57.25 0 100.5C0 143.75 37.15 178 83 178C128.85 178 166 143.75 166 100.5C166 57.25 128.85 23 83 23Z" fill="#66BB6A"/><path d="M52.5 0C23.505 0 0 21.045 0 47C0 72.955 23.505 94 52.5 94C81.495 94 105 72.955 105 47C105 21.045 81.495 0 52.5 0Z" fill="#81C784" transform="translate(58)"/><path d="M42.5 0C19.0275 0 0 17.685 0 39.5C0 61.315 19.0275 79 42.5 79C65.9725 79 85 61.315 85 39.5C85 17.685 65.9725 0 42.5 0Z" fill="#A5D6A7" transform="translate(18 20)"/></svg>
+      <svg class="decorative-element tree t2" viewBox="0 0 165 210" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="71" y="117" width="24" height="93" rx="4" fill="#795548"/><path d="M83 23C37.15 23 0 57.25 0 100.5C0 143.75 37.15 178 83 178C128.85 178 166 143.75 166 100.5C166 57.25 128.85 23 83 23Z" fill="#66BB6A"/><path d="M52.5 0C23.505 0 0 21.045 0 47C0 72.955 23.505 94 52.5 94C81.495 94 105 72.955 105 47C105 21.045 81.495 0 52.5 0Z" fill="#81C784" transform="translate(58)"/><path d="M42.5 0C19.0275 0 0 17.685 0 39.5C0 61.315 19.0275 79 42.5 79C65.9725 79 85 61.315 85 39.5C85 17.685 65.9725 0 42.5 0Z" fill="#A5D6A7" transform="translate(18 20)"/></svg>
+
+      <!-- Winding Path SVG Background -->
+      <svg class="level-path-svg" viewBox="0 0 400 600" preserveAspectRatio="none">
+        <path d="M 110 520 C 110 420, 330 380, 330 280 S 170 150, 170 80" stroke-width="20" fill="none"/>
+      </svg>
+      
+      <!-- Level 1 -->
+      <div class="level-entry" id="level-entry-1">
+        <a href="#" class="level-node unlocked">
+          <span class="level-number">1</span>
+        </a>
+      </div>
+
+      <!-- Level 2 -->
+      <div class="level-entry" id="level-entry-2">
+        <a href="#" class="level-node locked">
+          <span class="level-number">2</span>
+        </a>
+      </div>
+      
+      <!-- Level 3 -->
+      <div class="level-entry" id="level-entry-3">
+        <a href="#" class="level-node locked">
+          <span class="level-number">3</span>
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div class="footer-logo">EcoLearn</div>
+      <p class="footer-copyright">© EcoLearn | All rights reserved 2025</p>
+      <a href="#" class="btn btn-secondary">About Us</a>
+    </div>
+  </footer>
+
+  <script>
+    // --- Topics Dropdown Toggle (for navbar consistency) ---
+    const topicsDropdown = document.getElementById('topicsDropdown');
+    if (topicsDropdown) {
+        topicsDropdown.addEventListener('click', (event) => {
+            event.stopPropagation(); 
+            topicsDropdown.classList.toggle('active');
+        });
+    }
+    document.addEventListener('click', (event) => {
+      if (topicsDropdown && !topicsDropdown.contains(event.target)) {
+        topicsDropdown.classList.remove('active');
+      }
+    });
+  </script>
+
+</body>
+</html>
+
