@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bubble Shot: Climate Challenge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Basic Setup --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column; /* Changed for top-to-bottom layout */
+            height: 100vh; /* Full viewport height */
+            width: 100vw; /* Full viewport width */
+            overflow: hidden; /* Disable scrolling */
+            background-color: #f0f4f8; /* A light background for the page */
+        }
+
+        /* --- Theme Colors (from your EcoLearn website) --- */
+        :root {
+            --theme-green: #3A8C6B; /* A solid green inspired by your site */
+            --light-green-bg: #E6F4EA;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            height: 60px; /* Space for the navbar */
+            width: 100%;
+            background-color: var(--theme-green);
+            /* You can add navbar content like logo or links here later */
+        }
+
+        /* --- Main Content Area (holds sidebars and game) --- */
+        .main-content {
+            display: flex;
+            flex-grow: 1; /* This makes it fill the remaining vertical space */
+            height: calc(100vh - 60px); /* Adjust height to account for navbar */
+        }
+
+        /* --- Layout Structure --- */
+        .sidebar {
+            flex-basis: 18%; /* Width of the sidebar */
+            background-color: var(--theme-green);
+        }
+
+        .ad-bar {
+            flex-basis: 18%; /* Width of the ad bar */
+            background-color: var(--theme-green);
+        }
+
+        /* --- Main Game Area --- */
+        .game-container {
+            flex-grow: 1; /* Takes up the remaining space */
+            position: relative; /* Crucial for positioning elements inside */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            /* The new user-provided cloud image is used as the background here. */
+            background-image: url('image_551808.png');
+            background-size: cover;
+            background-position: center bottom;
+            background-repeat: no-repeat;
+        }
+
+        /* --- Game UI Elements --- */
+        .game-header {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .game-title {
+            font-size: 2rem; /* Reduced font size */
+            color: #005A9C; /* A deep blue for contrast against the sky */
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7);
+        }
+
+        .score-display {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #fff;
+            background-color: rgba(0, 90, 156, 0.8);
+            padding: 10px 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            border: 2px solid #fff;
+        }
+
+        .dustbin-container {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 120px;
+        }
+        
+        /* Dustbin SVG Icon */
+        .dustbin-svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0px 5px 5px rgba(0,0,0,0.3));
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <nav class="navbar"></nav>
+
+    <!-- Main Content wrapper -->
+    <div class="main-content">
+        <!-- Left Sidebar -->
+        <aside class="sidebar"></aside>
+
+        <!-- Main Game Window -->
+        <main class="game-container">
+
+            <!-- Header with Title and Score -->
+            <header class="game-header">
+                <h1 class="game-title">Climate Change: Pop the Pollution</h1>
+                <div id="score" class="score-display">Score: 0</div>
+            </header>
+
+            <!-- The game canvas will eventually go here -->
+            
+            <!-- Dustbin at the bottom -->
+            <div class="dustbin-container">
+                <svg class="dustbin-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 7H20" stroke="#4A5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10 11V17" stroke="#4A5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M14 11V17" stroke="#4A5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M5 7L6 19C6 19.5304 6.21071 20.0391 6.58579 20.4142C6.96086 20.7893 7.46957 21 8 21H16C16.5304 21 17.0391 20.7893 17.4142 20.4142C17.7893 20.0391 18 19.5304 18 19L19 7" stroke="#4A5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 7V4C9 3.73478 9.10536 3.48043 9.29289 3.29289C9.48043 3.10536 9.73478 3 10 3H14C14.2652 3 14.5196 3.10536 14.7071 3.29289C14.8946 3.48043 15 3.73478 15 4V7" stroke="#4A5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+        </main>
+
+        <!-- Right Ad Bar -->
+        <aside class="ad-bar"></aside>
+    </div>
+
+</body>
+</html>
+
