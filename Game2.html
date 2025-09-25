@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoSort - Waste Recycling Game</title>
+    <link rel="stylesheet" href="Game2.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Recycling Facility Background -->
+    <div class="facility-background">
+        <!-- Facility Structure -->
+        <div class="facility-ceiling">
+            <div class="ceiling-light light-1"></div>
+            <div class="ceiling-light light-2"></div>
+            <div class="ceiling-light light-3"></div>
+        </div>
+        
+        <div class="facility-wall wall-left"></div>
+        <div class="facility-wall wall-right"></div>
+        <div class="facility-wall wall-back"></div>
+        
+        <div class="facility-window window-left"></div>
+        <div class="facility-window window-right"></div>
+        
+        <!-- Conveyor System -->
+        <div class="conveyor-system">
+            <div class="conveyor-belt"></div>
+        </div>
+        
+        <!-- Material Stacks -->
+        <div class="material-stack cardboard-stack">
+            <div class="cardboard-box box-1"></div>
+            <div class="cardboard-box box-2"></div>
+            <div class="cardboard-box box-3"></div>
+        </div>
+        
+        <div class="material-stack bottle-stack">
+            <div class="plastic-bottle bottle-1"></div>
+            <div class="plastic-bottle bottle-2"></div>
+            <div class="plastic-bottle bottle-3"></div>
+            <div class="plastic-bottle bottle-4"></div>
+        </div>
+        
+        <div class="material-stack can-stack">
+            <div class="metal-can can-1"></div>
+            <div class="metal-can can-2"></div>
+            <div class="metal-can can-3"></div>
+        </div>
+        
+        <div class="facility-floor"></div>
+    </div>
+
+    <!-- Start Screen -->
+    <div id="startScreen" class="screen active">
+        <div class="screen-content">
+            <h1 class="game-title">
+                <i class="fas fa-recycle"></i>
+                EcoSort
+            </h1>
+            <p class="game-subtitle">Learn Recycling Through Fun!</p>
+            
+            <div class="instructions">
+                <h3>How to Play:</h3>
+                <ul>
+                    <li><i class="fas fa-hand-rock"></i> Drag waste items to correct bins</li>
+                    <li><i class="fas fa-recycle"></i> Recyclable: Plastic, Glass, Metal, Paper</li>
+                    <li><i class="fas fa-leaf"></i> Organic: Food waste, Plants</li>
+                    <li><i class="fas fa-trash"></i> Non-Recyclable: Mixed materials</li>
+                    <li><i class="fas fa-star"></i> Earn points for correct sorting</li>
+                    <li><i class="fas fa-clock"></i> 2 minutes to play + bonus time</li>
+                    <li><i class="fas fa-gift"></i> Get +5 seconds every 50 points</li>
+                </ul>
+            </div>
+
+            <div class="high-score">
+                <i class="fas fa-trophy"></i>
+                High Score: <span id="displayHighScore">0</span>
+            </div>
+
+            <button id="startBtn" class="game-btn primary">
+                <i class="fas fa-play"></i>
+                Start Game
+            </button>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="gameScreen" class="screen">
+        <div class="game-header">
+            <div class="game-stats">
+                <div class="stat">
+                    <i class="fas fa-star"></i>
+                    Score: <span id="score">0</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-layer-group"></i>
+                    Level: <span id="level">1</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-clock"></i>
+                    Time: <span id="timer">240</span>s
+                </div>
+                <div class="stat">
+                    <i class="fas fa-heart"></i>
+                    Lives: <span id="lives">8</span>
+                </div>
+            </div>
+            
+            <div class="game-controls">
+                <button id="pauseBtn" class="game-btn secondary">
+                    <i class="fas fa-pause"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="game-area">
+            <!-- Falling Items Container -->
+            <div id="fallingItems" class="falling-items"></div>
+
+            <!-- Recycling Bins -->
+            <div class="bins-container">
+                <div class="bin recyclable-bin" data-type="recyclable">
+                    <div class="bin-icon">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <div class="bin-content">
+                        <div class="bin-label">Recyclable</div>
+                        <div class="bin-description">Plastic, Glass, Metal, Paper</div>
+                    </div>
+                </div>
+
+                <div class="bin organic-bin" data-type="organic">
+                    <div class="bin-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="bin-content">
+                        <div class="bin-label">Organic</div>
+                        <div class="bin-description">Food, Plants</div>
+                    </div>
+                </div>
+
+                <div class="bin trash-bin" data-type="trash">
+                    <div class="bin-icon">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                    <div class="bin-content">
+                        <div class="bin-label">Non-Recyclable</div>
+                        <div class="bin-description">Mixed Materials</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pause Screen -->
+    <div id="pauseScreen" class="screen overlay">
+        <div class="screen-content">
+            <h2>Game Paused</h2>
+            <div class="pause-stats">
+                <p>Current Score: <span id="pauseScore">0</span></p>
+                <p>Current Level: <span id="pauseLevel">1</span></p>
+            </div>
+            
+            <div class="pause-buttons">
+                <button id="resumeBtn" class="game-btn primary">
+                    <i class="fas fa-play"></i>
+                    Resume
+                </button>
+                <button id="restartBtn" class="game-btn secondary">
+                    <i class="fas fa-redo"></i>
+                    Restart
+                </button>
+                <button id="quitBtn" class="game-btn danger">
+                    <i class="fas fa-home"></i>
+                    Main Menu
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameOverScreen" class="screen overlay">
+        <div class="screen-content">
+            <h2 class="game-over-title">Game Over!</h2>
+            
+            <div class="final-stats">
+                <div class="stat-item">
+                    <i class="fas fa-star"></i>
+                    <span>Final Score:</span>
+                    <span id="finalScore">0</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-layer-group"></i>
+                    <span>Level Reached:</span>
+                    <span id="finalLevel">1</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-trophy"></i>
+                    <span>High Score:</span>
+                    <span id="finalHighScore">0</span>
+                </div>
+            </div>
+
+            <div class="achievement" id="newHighScore" style="display: none;">
+                <i class="fas fa-trophy"></i>
+                New High Score!
+            </div>
+
+            <div class="eco-tip">
+                <h3><i class="fas fa-lightbulb"></i> Eco Tip:</h3>
+                <p id="ecoTipText">Did you know that recycling one aluminum can saves enough energy to power a laptop for 11 hours?</p>
+            </div>
+
+            <div class="game-over-buttons">
+                <button id="playAgainBtn" class="game-btn primary">
+                    <i class="fas fa-redo"></i>
+                    Play Again
+                </button>
+                <button id="mainMenuBtn" class="game-btn secondary">
+                    <i class="fas fa-home"></i>
+                    Main Menu
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bonus Round Screen -->
+    <div id="bonusScreen" class="screen overlay">
+        <div class="screen-content">
+            <h2 class="bonus-title">
+                <i class="fas fa-star"></i>
+                Bonus Round!
+                <i class="fas fa-star"></i>
+            </h2>
+            <p class="bonus-description">
+                Multiple items will fall simultaneously!<br>
+                Sort them quickly for extra points!
+            </p>
+            <div class="bonus-countdown">
+                <span id="bonusCountdown">3</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Score Animation -->
+    <div id="floatingScores"></div>
+
+    <script src="Game2.js"></script>
+</body>
+</html>
