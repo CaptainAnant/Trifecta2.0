@@ -1,162 +1,86 @@
-/* --- Basic Setup --- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    font-family: 'Poppins', sans-serif;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    width: 100vw;
-    overflow: hidden;
-    background-color: #f0f4f8;
+  margin: 0;
+  padding: 0;
+  background-color: #2e7d32; /* Darker green for contrast */
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+  color: white;
 }
 
-/* --- Theme Colors --- */
-:root {
-    --theme-green: #3A8C6B;
-    --light-green-bg: #E6F4EA;
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1b5e20;
+  padding: 10px 20px;
+  font-size: 1.2rem;
 }
 
-/* --- Navbar --- */
-.navbar {
-    height: 60px;
-    width: 100%;
-    background-color: var(--theme-green);
+.status-bar {
+  display: flex;
+  gap: 15px;
 }
 
-/* --- Main Content --- */
-.main-content {
-    display: flex;
-    flex-grow: 1;
-    height: calc(100vh - 60px);
+#score, #timer {
+  background-color: #388e3c;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 1rem;
 }
 
-/* --- Sidebars --- */
-.sidebar,
-.ad-bar {
-    flex-basis: 18%;
-    background-color: var(--theme-green);
+#gameArea {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 60px);
+  overflow: hidden;
 }
 
-/* --- Main Game Area --- */
-.game-container {
-    flex-grow: 1;
-    position: relative;
-    background-image: url('image_551808.png');
-    background-size: cover;
-    background-position: center bottom;
-    background-repeat: no-repeat;
-    overflow: hidden;
-    /* Hide bubbles overflowing */
+.bubble {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  line-height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ffffffaa, #81c784);
+  color: #1b5e20;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+  animation: floatUp 6s linear forwards;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  user-select: none;
+  font-size: 1rem;
 }
 
-/* --- Game Canvas --- */
-#gameCanvas {
-    width: 100%;
-    height: 100%;
-    cursor: crosshair;
+.good {
+  background: radial-gradient(circle at 30% 30%, #ffffffaa, #aed581);
+  color: #2e7d32;
 }
 
-/* --- Game UI Elements --- */
-.game-header {
-    position: absolute;
-    top: 20px;
-    left: 0;
-    width: 100%;
-    padding: 0 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 10;
+.bad {
+  background: radial-gradient(circle at 30% 30%, #ffccbc, #e57373);
+  color: #b71c1c;
 }
 
-.game-title {
-    font-size: 2rem;
-    color: #005A9C;
-    font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7);
+@keyframes floatUp {
+  from {
+    bottom: -150px;
+    opacity: 0;
+  }
+  to {
+    bottom: 100%;
+    opacity: 1;
+  }
 }
 
-.stats-container {
-    display: flex;
-    gap: 20px;
-}
-
-.score-display,
-.misses-display {
-    font-size: 1.5rem;
-    /* Adjusted size */
-    font-weight: 600;
-    color: #fff;
-    background-color: rgba(0, 90, 156, 0.8);
-    padding: 10px 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    border: 2px solid #fff;
-}
-
-.misses-display {
-    background-color: rgba(200, 50, 50, 0.8);
-}
-
-.dustbin-container {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 120px;
-    z-index: 5;
-}
-
-.dustbin-svg {
-    width: 100%;
-    height: 100%;
-    filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.3));
-}
-
-/* --- Game Over Modal --- */
-.game-over-modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, 0.95);
-    padding: 40px;
-    border-radius: 20px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    z-index: 100;
-    display: none;
-    /* Hidden by default */
-}
-
-.game-over-modal h2 {
-    font-size: 2.5rem;
-    color: #d9534f;
-    margin-bottom: 15px;
-}
-
-.game-over-modal p {
-    font-size: 1.5rem;
-    margin-bottom: 30px;
-}
-
-#restart-btn {
-    font-size: 1.2rem;
-    padding: 12px 30px;
-    border-radius: 10px;
-    border: none;
-    background-color: var(--theme-green);
-    color: white;
-    cursor: pointer;
-    transition: transform 0.2s;
-}
-
-#restart-btn:hover {
-    transform: scale(1.05);
+@keyframes pop {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
 }
