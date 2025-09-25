@@ -1,109 +1,162 @@
- /* --- Basic Setup --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+/* --- Basic Setup --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            display: flex;
-            flex-direction: column; /* Changed for top-to-bottom layout */
-            height: 100vh; /* Full viewport height */
-            width: 100vw; /* Full viewport width */
-            overflow: hidden; /* Disable scrolling */
-            background-color: #f0f4f8; /* A light background for the page */
-        }
+body {
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: #f0f4f8;
+}
 
-        /* --- Theme Colors (from your EcoLearn website) --- */
-        :root {
-            --theme-green: #3A8C6B; /* A solid green inspired by your site */
-            --light-green-bg: #E6F4EA;
-        }
+/* --- Theme Colors --- */
+:root {
+    --theme-green: #3A8C6B;
+    --light-green-bg: #E6F4EA;
+}
 
-        /* --- Navbar --- */
-        .navbar {
-            height: 60px; /* Space for the navbar */
-            width: 100%;
-            background-color: var(--theme-green);
-            /* You can add navbar content like logo or links here later */
-        }
+/* --- Navbar --- */
+.navbar {
+    height: 60px;
+    width: 100%;
+    background-color: var(--theme-green);
+}
 
-        /* --- Main Content Area (holds sidebars and game) --- */
-        .main-content {
-            display: flex;
-            flex-grow: 1; /* This makes it fill the remaining vertical space */
-            height: calc(100vh - 60px); /* Adjust height to account for navbar */
-        }
+/* --- Main Content --- */
+.main-content {
+    display: flex;
+    flex-grow: 1;
+    height: calc(100vh - 60px);
+}
 
-        /* --- Layout Structure --- */
-        .sidebar {
-            flex-basis: 18%; /* Width of the sidebar */
-            background-color: var(--theme-green);
-        }
+/* --- Sidebars --- */
+.sidebar,
+.ad-bar {
+    flex-basis: 18%;
+    background-color: var(--theme-green);
+}
 
-        .ad-bar {
-            flex-basis: 18%; /* Width of the ad bar */
-            background-color: var(--theme-green);
-        }
+/* --- Main Game Area --- */
+.game-container {
+    flex-grow: 1;
+    position: relative;
+    background-image: url('image_551808.png');
+    background-size: cover;
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    /* Hide bubbles overflowing */
+}
 
-        /* --- Main Game Area --- */
-        .game-container {
-            flex-grow: 1; /* Takes up the remaining space */
-            position: relative; /* Crucial for positioning elements inside */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            /* The new user-provided cloud image is used as the background here. */
-            background-image: url('image_551808.png');
-            background-size: cover;
-            background-position: center bottom;
-            background-repeat: no-repeat;
-        }
+/* --- Game Canvas --- */
+#gameCanvas {
+    width: 100%;
+    height: 100%;
+    cursor: crosshair;
+}
 
-        /* --- Game UI Elements --- */
-        .game-header {
-            position: absolute;
-            top: 20px;
-            left: 0;
-            width: 100%;
-            padding: 0 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+/* --- Game UI Elements --- */
+.game-header {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    padding: 0 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 10;
+}
 
-        .game-title {
-            font-size: 2rem; /* Reduced font size */
-            color: #005A9C; /* A deep blue for contrast against the sky */
-            font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7);
-        }
+.game-title {
+    font-size: 2rem;
+    color: #005A9C;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7);
+}
 
-        .score-display {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #fff;
-            background-color: rgba(0, 90, 156, 0.8);
-            padding: 10px 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-            border: 2px solid #fff;
-        }
+.stats-container {
+    display: flex;
+    gap: 20px;
+}
 
-        .dustbin-container {
-            position: absolute;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 120px;
-        }
-        
-        /* Dustbin SVG Icon */
-        .dustbin-svg {
-            width: 100%;
-            height: 100%;
-            filter: drop-shadow(0px 5px 5px rgba(0,0,0,0.3));
-        }
+.score-display,
+.misses-display {
+    font-size: 1.5rem;
+    /* Adjusted size */
+    font-weight: 600;
+    color: #fff;
+    background-color: rgba(0, 90, 156, 0.8);
+    padding: 10px 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border: 2px solid #fff;
+}
+
+.misses-display {
+    background-color: rgba(200, 50, 50, 0.8);
+}
+
+.dustbin-container {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 120px;
+    z-index: 5;
+}
+
+.dustbin-svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.3));
+}
+
+/* --- Game Over Modal --- */
+.game-over-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+    display: none;
+    /* Hidden by default */
+}
+
+.game-over-modal h2 {
+    font-size: 2.5rem;
+    color: #d9534f;
+    margin-bottom: 15px;
+}
+
+.game-over-modal p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+#restart-btn {
+    font-size: 1.2rem;
+    padding: 12px 30px;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--theme-green);
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#restart-btn:hover {
+    transform: scale(1.05);
+}
