@@ -255,6 +255,20 @@
         left: 370px;
     }
 
+    .game-entry {
+        position: absolute;
+        z-index: 2;
+    }
+
+    #game-2 {
+        top: 130px;
+        left: 275px;
+    }
+    
+    .game-icon {
+        font-size: 2rem;
+    }
+
     #level-entry-3 {
         top: 20px;
         left: 150px;
@@ -276,6 +290,27 @@
     }
 
     .level-node.unlocked:hover {
+        transform: scale(1.1);
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3), 0 15px 25px -5px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Game icon styles */
+    .game-node {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background-color: var(--primary-green);
+        color: var(--white);
+        border: 5px solid var(--dark-green);
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3), var(--shadow-md);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        cursor: pointer;
+    }
+
+    .game-node.unlocked:hover {
         transform: scale(1.1);
         box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3), 0 15px 25px -5px rgba(0, 0, 0, 0.25);
     }
