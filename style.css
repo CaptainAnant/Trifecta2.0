@@ -1,6 +1,16 @@
+/* =================================================================== */
+/* 1. THEME & CONSTANT EFFECTS                                         */
+/* =================================================================== */
 :root {
+  /* Green theme colors */
+  --primary-green: #3FAA7E;
+  --dark-green: #37956F;
   --green-700: #047857;
   --green-600: #059669;
+  --light-green-bg: #E7F5EF;
+  
+  /* Grayscale colors */
+  --white: #FFFFFF;
   --gray-50: #f9fafb;
   --gray-100: #f3f4f6;
   --gray-200: #e5e7eb;
@@ -9,7 +19,16 @@
   --gray-600: #4b5563;
   --gray-700: #374151;
   --gray-800: #1f2937;
-  --white: #ffffff;
+  
+  /* Legacy colors for backward compatibility */
+  --gray-bg: #F8F9FA;
+  --text-dark: #333333;
+  --text-light: #6c757d;
+  --border-color: #e0e0e0;
+  
+  /* Shadow definitions */
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 * {
@@ -24,11 +43,13 @@ body {
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background-color: var(--gray-100);
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--gray-bg);
+  color: var(--text-dark);
   display: flex;
   flex-direction: column;
-  color: var(--gray-800);
+  height: 100vh; /* Set fixed viewport height */
+  overflow: hidden; /* Prevent scrolling */
 }
 
 a {
@@ -46,10 +67,15 @@ button {
   cursor: pointer;
 }
 
-/* =================================================================== */
-/* 2. LAYOUT STYLES                                                    */
-/* =================================================================== */
 .container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Alternative container for new layout system */
+.container-fluid {
   width: 100%;
   margin-left: auto;
   margin-right: auto;
@@ -57,7 +83,10 @@ button {
   padding-right: 1rem;
 }
 
-.main-layout {
+/* =================================================================== */
+/* LAYOUT STYLES                                                       */
+/* =================================================================== */
+.main-layout-flex {
   display: flex;
   flex: 1;
   overflow: hidden;
@@ -71,27 +100,160 @@ button {
   width: 100%;
 }
 
-/* =================================================================== */
-/* 3. COMPONENT STYLES                                                 */
-/* =================================================================== */
+/* Constant Effect: Button Style */
+.btn {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
 
-/* --- Navigation Bar --- */
+.btn-primary {
+    background-color: var(--primary-green);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background-color: var(--dark-green);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-secondary {
+    background-color: var(--light-green-bg);
+    color: var(--dark-green);
+    border-color: var(--dark-green);
+}
+
+.btn-secondary:hover {
+    background-color: var(--dark-green);
+    color: var(--white);
+}
+
+/* Constant Effect: Card Style */
+.card {
+    background-color: var(--white);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+}
+
+/* =================================================================== */
+/* 2. NAVBAR                                                           */
+/* =================================================================== */
 .navbar {
   background-color: var(--white);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-sm);
   position: sticky;
   top: 0;
-  z-index: 30;
+  z-index: 100;
+  padding: 1rem 0;
 }
 
-.navbar .container {
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--primary-green);
+  flex-shrink: 0;
+}
+
+.nav-links {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  height: 4rem;
-  /* 64px */
+  gap: 1.5rem;
 }
 
+.nav-item {
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--text-light);
+  position: relative;
+  padding: 0.5rem 0;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.nav-item:hover {
+  color: var(--primary-green);
+}
+
+/* Dropdown Styles */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--white);
+  border-radius: 8px;
+  box-shadow: var(--shadow-md);
+  list-style: none;
+  padding: 0.5rem 0;
+  min-width: 160px;
+  z-index: 101;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 0.75rem 1.25rem;
+  color: var(--text-dark);
+}
+
+.dropdown-menu a:hover {
+  background-color: var(--light-green-bg);
+  color: var(--primary-green);
+}
+
+.dropdown.active .dropdown-menu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nav-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 500;
+}
+
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--primary-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-weight: 600;
+}
+
+.hamburger {
+    display: none; /* Hamburger is no longer used */
+}
+
+/* =================================================================== */
+/* ADDITIONAL NAVIGATION COMPONENTS                                     */
+/* =================================================================== */
+
+/* --- Enhanced Navigation Bar --- */
 .navbar-left {
   display: flex;
   align-items: center;
@@ -108,14 +270,12 @@ button {
 
 .navbar-brand {
   font-size: 1.5rem;
-  /* 24px */
   font-weight: 700;
   color: var(--green-700);
 }
 
 .navbar-links {
-  display: none;
-  /* Hidden by default on mobile */
+  display: none; /* Hidden by default on mobile */
   align-items: center;
 }
 
@@ -135,7 +295,6 @@ button {
 /* --- Sidebar --- */
 #sidebar {
   width: 280px;
-  /* Wider for mobile overlay */
   background-color: var(--gray-800);
   color: var(--white);
   flex-shrink: 0;
@@ -158,7 +317,6 @@ button {
 
 .sidebar-content h3 {
   font-size: 1.125rem;
-  /* 18px */
   font-weight: 600;
   margin-bottom: 1rem;
 }
@@ -205,7 +363,59 @@ button {
   color: var(--gray-400);
 }
 
-/* --- Main Content --- */
+/* =================================================================== */
+/* 3. MAIN CONTENT & AD SECTION                                        */
+/* =================================================================== */
+.main-section {
+  flex: 1;
+  padding: 2.5rem 0;
+  overflow: hidden; /* Prevent content from scrolling */
+}
+
+.main-layout {
+  display: flex;
+  gap: 2rem;
+  height: 100%;
+}
+
+.content-area {
+  flex: 1;
+  min-width: 0; /* Important for flexbox shrinking */
+  background: var(--white);
+  border-radius: 12px;
+  padding: 2rem;
+  border: 1px dashed var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.ad-section {
+  flex-basis: 300px;
+  flex-shrink: 0;
+}
+
+.ad-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-align: center;
+  background-color: var(--gray-bg);
+  border-style: dashed;
+}
+
+.ad-placeholder h3 {
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+}
+.ad-placeholder p {
+  color: var(--text-light);
+}
+
+/* --- Enhanced Main Content --- */
 .main-content {
   flex: 1;
   padding: 1.5rem;
@@ -214,7 +424,6 @@ button {
 
 .main-content h1 {
   font-size: 1.875rem;
-  /* 30px */
   font-weight: 700;
   margin-bottom: 1rem;
 }
@@ -233,15 +442,13 @@ button {
 
 .content-card h2 {
   font-size: 1.25rem;
-  /* 20px */
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
 
-/* --- Ad Bar --- */
+/* --- Enhanced Ad Bar --- */
 .ad-bar {
-  display: none;
-  /* Hidden by default */
+  display: none; /* Hidden by default */
   width: 20%;
   background-color: var(--gray-50);
   border-left: 1px solid var(--gray-200);
@@ -272,8 +479,17 @@ button {
   margin-top: 0.5rem;
 }
 
-/* --- Footer --- */
+/* =================================================================== */
+/* 4. FOOTER                                                           */
+/* =================================================================== */
 .footer {
+  background-color: var(--white);
+  border-top: 1px solid var(--border-color);
+  padding: 1.5rem 0; /* Shortened footer */
+}
+
+/* Enhanced footer alternative */
+.footer-enhanced {
   background-color: var(--gray-200);
   text-align: center;
   padding: 0.75rem;
@@ -282,8 +498,32 @@ button {
   border-top: 1px solid var(--gray-200);
 }
 
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-green);
+}
+
+.footer-copyright {
+  color: var(--text-light);
+}
+
+.footer-flex {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
 /* =================================================================== */
-/* 4. RESPONSIVE STYLES                                                */
+/* 5. ENHANCED RESPONSIVENESS                                          */
 /* =================================================================== */
 
 /* Medium screens (tablets) */
@@ -299,8 +539,47 @@ button {
   }
 
   #sidebarToggle {
-    display: none;
-    /* Hide toggle on larger screens */
+    display: none; /* Hide toggle on larger screens */
+  }
+  
+  .footer-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .nav-links {
+    gap: 0.75rem; /* Reduce gap on smaller screens */
+    overflow-x: auto; /* Allow horizontal scrolling if needed */
+    padding-bottom: 5px;
+  }
+
+  .nav-item {
+    font-size: 0.9rem; /* Slightly smaller font */
+    white-space: nowrap; /* Prevent nav items from wrapping */
+  }
+  
+  .nav-profile span {
+      display: none; /* Hide the word "Profile" on smaller screens */
+  }
+
+  .main-layout {
+    flex-direction: column;
+    height: auto;
+  }
+  
+  .content-area {
+    min-height: 300px;
+  }
+
+  .ad-section {
+    flex-basis: auto;
+  }
+
+  body {
+    overflow-y: auto; /* Allow scrolling on mobile view */
+    height: auto;
   }
 }
 
