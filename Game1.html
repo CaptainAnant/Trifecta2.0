@@ -7,32 +7,179 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- Basic Setup --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            background-color: #f0f4f8;
+        }
+
+        /* --- Theme Colors --- */
+        :root {
+            --theme-green: #3A8C6B;
+            --light-green-bg: #E6F4EA;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            height: 60px;
+            width: 100%;
+            background-color: var(--theme-green);
+        }
+
+        /* --- Main Content --- */
+        .main-content {
+            display: flex;
+            flex-grow: 1;
+            height: calc(100vh - 60px);
+        }
+
+        /* --- Sidebars --- */
+        .sidebar, .ad-bar {
+            flex-basis: 18%;
+            background-color: var(--theme-green);
+        }
+
+        /* --- Main Game Area --- */
+        .game-container {
+            flex-grow: 1;
+            position: relative;
+            background-image: url('image_551808.png');
+            background-size: cover;
+            background-position: center bottom;
+            background-repeat: no-repeat;
+            overflow: hidden; /* Hide bubbles overflowing */
+        }
+
+        /* --- Game Canvas --- */
+        #gameCanvas {
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+        }
+
+        /* --- Game UI Elements --- */
+        .game-header {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            padding: 0 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .game-title {
+            font-size: 2rem;
+            color: #005A9C;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7);
+        }
+
+        .stats-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .score-display, .misses-display {
+            font-size: 1.5rem; /* Adjusted size */
+            font-weight: 600;
+            color: #fff;
+            background-color: rgba(0, 90, 156, 0.8);
+            padding: 10px 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            border: 2px solid #fff;
+        }
+        
+        .misses-display {
+             background-color: rgba(200, 50, 50, 0.8);
+        }
+
+        .dustbin-container {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 120px;
+            z-index: 5;
+        }
+        
+        .dustbin-svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0px 5px 5px rgba(0,0,0,0.3));
+        }
+
+        /* --- Game Over Modal --- */
+        .game-over-modal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 100;
+            display: none; /* Hidden by default */
+        }
+        .game-over-modal h2 {
+            font-size: 2.5rem;
+            color: #d9534f;
+            margin-bottom: 15px;
+        }
+        .game-over-modal p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+        }
+        #restart-btn {
+            font-size: 1.2rem;
+            padding: 12px 30px;
+            border-radius: 10px;
+            border: none;
+            background-color: var(--theme-green);
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        #restart-btn:hover {
+            transform: scale(1.05);
+        }
+
+    </style>
 </head>
 <body>
 
-    <!-- Top Navigation Bar -->
     <nav class="navbar"></nav>
-
-    <!-- Main Content wrapper -->
     <div class="main-content">
-        <!-- Left Sidebar -->
         <aside class="sidebar"></aside>
-
-        <!-- Main Game Window -->
         <main class="game-container">
-
-            <!-- Header with Title and Score -->
+            <canvas id="gameCanvas"></canvas>
             <header class="game-header">
                 <h1 class="game-title">Climate Change: Pop the Pollution</h1>
-                <div id="score" class="score-display">Score: 0</div>
+                <div class="stats-container">
+                    <div id="score" class="score-display">Score: 0</div>
+                    <div id="misses" class="misses-display">Misses: 0</div>
+                </div>
             </header>
-
-            <!-- The game canvas will eventually go here -->
-            
-            <!-- Dustbin at the bottom -->
             <div class="dustbin-container">
-                <svg class="dustbin-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                 <svg class="dustbin-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4 7H20" stroke="#4A5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M10 11V17" stroke="#4A5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M14 11V17" stroke="#4A5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -40,13 +187,192 @@
                     <path d="M9 7V4C9 3.73478 9.10536 3.48043 9.29289 3.29289C9.48043 3.10536 9.73478 3 10 3H14C14.2652 3 14.5196 3.10536 14.7071 3.29289C14.8946 3.48043 15 3.73478 15 4V7" stroke="#4A5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </div>
-
+            <div id="gameOverModal" class="game-over-modal">
+                <h2>Game Over!</h2>
+                <p>Final Score: <span id="finalScore">0</span></p>
+                <button id="restart-btn">Play Again</button>
+            </div>
         </main>
-
-        <!-- Right Ad Bar -->
         <aside class="ad-bar"></aside>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('gameCanvas');
+            const ctx = canvas.getContext('2d');
+            const scoreEl = document.getElementById('score');
+            const missesEl = document.getElementById('misses');
+            const gameOverModal = document.getElementById('gameOverModal');
+            const finalScoreEl = document.getElementById('finalScore');
+            const restartBtn = document.getElementById('restart-btn');
+
+            let canvasWidth, canvasHeight;
+            let score, misses, gameActive;
+            let bubbles = [];
+            let bubbleInterval;
+
+            const badBubbleTexts = [
+                "Coal Power", "Deforestation", "Landfills", "Diesel Trucks",
+                "Air Travel", "Plastic Burning", "Factory Farming", "Industrial Smoke",
+                "Single-Use Plastics", "Fast Fashion"
+            ];
+            const goodBubbleTexts = [
+                "Solar Energy", "Wind Turbines", "Public Transport", "Reforestation",
+                "Recycling", "Plant-Based Diets", "Electric Vehicles", "Efficient Appliances",
+                "Green Buildings", "Water Conservation"
+            ];
+
+            function resizeCanvas() {
+                const container = canvas.parentElement;
+                canvas.width = container.clientWidth;
+                canvas.height = container.clientHeight;
+                canvasWidth = canvas.width;
+                canvasHeight = canvas.height;
+            }
+
+            class Bubble {
+                constructor(x, y, radius, text, type) {
+                    this.x = x;
+                    this.y = y;
+                    this.radius = radius;
+                    this.text = text;
+                    this.type = type;
+                    this.speedY = Math.random() * 1.5 + 1; // Random upward speed
+                    this.isPopped = false;
+                    this.fallSpeed = 5;
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    if (this.type === 'good') {
+                        ctx.fillStyle = 'rgba(76, 175, 80, 0.7)'; // Greenish
+                    } else {
+                        ctx.fillStyle = 'rgba(211, 47, 47, 0.7)'; // Reddish
+                    }
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.closePath();
+
+                    // Draw text
+                    if (!this.isPopped) {
+                        ctx.fillStyle = 'white';
+                        ctx.font = `bold ${this.radius / 3.5}px Poppins`;
+                        ctx.textAlign = 'center';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillText(this.text, this.x, this.y);
+                    }
+                }
+
+                update() {
+                    if (this.isPopped) {
+                        // If popped, fall down
+                        this.y += this.fallSpeed;
+                    } else {
+                        // Otherwise, float up
+                        this.y -= this.speedY;
+                    }
+                    this.draw();
+                }
+            }
+
+            function spawnBubble() {
+                const radius = Math.random() * 30 + 50; // Radius between 50 and 80
+                const x = Math.random() * (canvasWidth - radius * 2) + radius;
+                const y = canvasHeight + radius;
+                const type = Math.random() > 0.5 ? 'good' : 'bad';
+                const text = type === 'good'
+                    ? goodBubbleTexts[Math.floor(Math.random() * goodBubbleTexts.length)]
+                    : badBubbleTexts[Math.floor(Math.random() * badBubbleTexts.length)];
+                
+                bubbles.push(new Bubble(x, y, radius, text, type));
+            }
+
+            function handleBubbles() {
+                for (let i = bubbles.length - 1; i >= 0; i--) {
+                    bubbles[i].update();
+
+                    // Good bubble reaches the top
+                    if (!bubbles[i].isPopped && bubbles[i].type === 'good' && bubbles[i].y + bubbles[i].radius < 0) {
+                        score += 10;
+                        bubbles.splice(i, 1);
+                    }
+                    // Bad bubble reaches the top (a miss)
+                    else if (!bubbles[i].isPopped && bubbles[i].type === 'bad' && bubbles[i].y + bubbles[i].radius < 0) {
+                        misses++;
+                        bubbles.splice(i, 1);
+                        if (misses >= 3) {
+                            endGame();
+                        }
+                    }
+                    // Popped bubble falls out of view
+                    else if (bubbles[i].isPopped && bubbles[i].y - bubbles[i].radius > canvasHeight) {
+                         bubbles.splice(i, 1);
+                    }
+                }
+            }
+
+            function animate() {
+                if (!gameActive) return;
+                ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+                handleBubbles();
+                updateStats();
+                requestAnimationFrame(animate);
+            }
+
+            function updateStats() {
+                scoreEl.textContent = `Score: ${score}`;
+                missesEl.textContent = `Misses: ${misses}`;
+            }
+
+            function startGame() {
+                score = 0;
+                misses = 0;
+                bubbles = [];
+                gameActive = true;
+                gameOverModal.style.display = 'none';
+
+                resizeCanvas();
+                animate();
+                bubbleInterval = setInterval(spawnBubble, 2000);
+            }
+            
+            function endGame() {
+                gameActive = false;
+                clearInterval(bubbleInterval);
+                finalScoreEl.textContent = score;
+                gameOverModal.style.display = 'block';
+            }
+
+            canvas.addEventListener('click', (event) => {
+                if (!gameActive) return;
+                const rect = canvas.getBoundingClientRect();
+                const mouseX = event.clientX - rect.left;
+                const mouseY = event.clientY - rect.top;
+
+                for (let i = bubbles.length - 1; i >= 0; i--) {
+                    const bubble = bubbles[i];
+                    if (bubble.isPopped) continue;
+
+                    const distance = Math.sqrt((mouseX - bubble.x)**2 + (mouseY - bubble.y)**2);
+                    if (distance < bubble.radius) {
+                        if (bubble.type === 'bad') {
+                            score += 5;
+                            bubble.isPopped = true; // Make it fall
+                        } else {
+                            score -= 10; // Penalty for popping a good bubble
+                        }
+                        break; // Only pop one bubble per click
+                    }
+                }
+            });
+
+            window.addEventListener('resize', resizeCanvas);
+            restartBtn.addEventListener('click', startGame);
+
+            // Initial Start
+            startGame();
+        });
+    </script>
 </body>
 </html>
 
