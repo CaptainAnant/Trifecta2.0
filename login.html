@@ -62,6 +62,11 @@
       </div>
     </div>
   </div>
-  <script src="login.js"></script>
+  
+  <!-- ** THE FIX IS HERE ** -->
+  <!-- The script tag now includes type="module" which is required for Firebase imports -->
+  <script type="module" src="login.js"></script>
+
 </body>
 </html>
+
