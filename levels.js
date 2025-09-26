@@ -1,36 +1,30 @@
-// Topics Dropdown Toggle
+window.onload = function() {
+// Get the topic from the URL query parameter
+const urlParams = new URLSearchParams(window.location.search);
+const topic = urlParams.get('topic');
+
+// Find the heading element on the page
+const topicTitle = document.getElementById('topicTitle');
+
+// If a topic is found and the heading element exists, update the text
+if (topic && topicTitle) {
+topicTitle.textContent = topic;
+}
+
+// --- TOPICS DROPDOWN TOGGLE (for navbar consistency) ---
 const topicsDropdown = document.getElementById('topicsDropdown');
+
 if (topicsDropdown) {
 topicsDropdown.addEventListener('click', (event) => {
 event.stopPropagation();
 topicsDropdown.classList.toggle('active');
 });
-}
 
-// Close dropdown when clicking outside
 document.addEventListener('click', (event) => {
-if (topicsDropdown && !topicsDropdown.contains(event.target)) {
-topicsDropdown.classList.remove('active');
-}
+  if (topicsDropdown && !topicsDropdown.contains(event.target)) {
+    topicsDropdown.classList.remove('active');
+  }
 });
 
-// Update the levels page title with the selected topic
-document.addEventListener('DOMContentLoaded', () => {
-const topicTitle = document.getElementById('topicTitle');
-
-// Check for topic from sessionStorage first
-let topic = sessionStorage.getItem('selectedTopic');
-
-// If not in sessionStorage, check the URL parameter
-if (!topic) {
-    const urlParams = new URLSearchParams(window.location.search);
-    topic = urlParams.get('topic');
 }
-
-if (topic) {
-    topicTitle.textContent = topic;
-} else {
-    topicTitle.textContent = "EcoLearn Levels"; // Default title if no topic is found
-}
-
-});
+};
