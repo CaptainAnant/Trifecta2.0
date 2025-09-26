@@ -1,85 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EcoLearn | Dashboard</title>
-  <!-- Google Fonts - Poppins -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoLearn | Dashboard</title>
+    <!-- Google Fonts Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <!-- =================================================================== -->
-  <!-- NAVBAR                                                              -->
-  <!-- =================================================================== -->
-  <header class="navbar">
-    <div class="container nav-container">
-      <a href="index.html" class="nav-logo">EcoLearn</a>
-      
-      <nav class="nav-links" id="navLinks">
-        <a href="index.html" class="nav-item">Dashboard</a>
-        <div class="nav-item dropdown" id="topicsDropdown">
-          <span>Topics ▼</span>
-          <ul class="dropdown-menu">
-            <li><a href="levels.html">Climate Change</a></li>
-            <li><a href="levels.html">Pollution</a></li>
-            <li><a href="levels.html">Deforestation</a></li>
-            <li><a href="levels.html">Water Scarcity</a></li>
-            <li><a href="levels.html">Biodiversity</a></li>
-            <li><a href="levels.html">Waste Management</a></li>
-          </ul>
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo">EcoLearn</a>
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-item">Dashboard</a>
+                <div class="nav-item dropdown" id="topicsDropdown">
+                    <span>Topics ▼</span>
+                    <ul class="dropdown-menu">
+                        <li><a href="levels.html?topic=Climate Change" data-topic="Climate Change">Climate Change</a></li>
+                        <li><a href="levels.html?topic=Pollution" data-topic="Pollution">Pollution</a></li>
+                        <li><a href="levels.html?topic=Deforestation" data-topic="Deforestation">Deforestation</a></li>
+                        <li><a href="levels.html?topic=Water Scarcity" data-topic="Water Scarcity">Water Scarcity</a></li>
+                        <li><a href="levels.html?topic=Biodiversity" data-topic="Biodiversity">Biodiversity</a></li>
+                        <li><a href="levels.html?topic=Waste Management" data-topic="Waste Management">Waste Management</a></li>
+                    </ul>
+                </div>
+                <a href="#" class="nav-item">LeaderBoard</a>
+                <a href="#" class="nav-item">My Badges</a>
+            </nav>
+            <div class="nav-right">
+                <div class="nav-profile">
+                    <div class="profile-icon">P</div>
+                    <span><a href="#" style="color:black;">Profile</a></span>
+                </div>
+            </div>
         </div>
-        <a href="#" class="nav-item">LeaderBoard</a>
-        <a href="#" class="nav-item">My Badges</a>
-      </nav>
-      
-      <div class="nav-right">
-        <div class="nav-profile">
-          <div class="profile-icon">P</div>
-          <span><a href="#">Profile</a></span>
+    </header>
+
+    <!-- MAIN CONTENT & AD SECTION -->
+    <main class="main-section">
+        <div class="main-layout-container">
+            <!-- Left Side: Main Content Area -->
+            <section class="content-area">
+                <div class="content-header">
+                    <h1>Explore Your Eco-Journey</h1>
+                    <p>Start with a topic below to begin your adventure!</p>
+                </div>
+                <div class="topic-buttons-grid">
+                    <a href="levels.html?topic=Climate Change" class="topic-btn climate-change-btn" data-topic="Climate Change">
+                        Climate Change
+                    </a>
+                    <a href="levels.html?topic=Pollution" class="topic-btn pollution-btn" data-topic="Pollution">
+                        Pollution
+                    </a>
+                    <a href="levels.html?topic=Deforestation" class="topic-btn deforestation-btn" data-topic="Deforestation">
+                        Deforestation
+                    </a>
+                    <a href="levels.html?topic=Water Scarcity" class="topic-btn water-scarcity-btn" data-topic="Water Scarcity">
+                        Water Scarcity
+                    </a>
+                    <a href="levels.html?topic=Biodiversity" class="topic-btn biodiversity-btn" data-topic="Biodiversity">
+                        Biodiversity
+                    </a>
+                    <a href="levels.html?topic=Waste Management" class="topic-btn waste-management-btn" data-topic="Waste Management">
+                        Waste Management
+                    </a>
+                </div>
+            </section>
+            <!-- Right Side: Ad Section -->
+            <aside class="ad-section">
+                <div class="ad-content">
+                    <h3>Join the Green Movement!</h3>
+                    <p>Learn about environmental challenges and contribute to a sustainable future. Every bit helps!</p>
+                    <button class="join-btn">Sign Up Now</button>
+                    <a href="about.html" class="more-link">Learn More</a>
+                </div>
+            </aside>
         </div>
-      </div>
-    </div>
-  </header>
+    </main>
 
-  <!-- =================================================================== -->
-  <!-- MAIN CONTENT & AD SECTION                                           -->
-  <!-- =================================================================== -->
-  <main class="main-section">
-    <div class="container main-layout">
-      <!-- Left Side: Main Content Area -->
-      <section class="content-area">
-          <div class="placeholder-text">
-              <h1 style="margin-bottom: 1rem; color: var(--text-dark);">Main Content Area</h1>
-              <p style="color: var(--text-light);">Your gamified modules, quizzes, and lessons will appear here.</p>
-          </div>
-      </section>
-
-      <!-- Right Side: Ad Section -->
-      <aside class="ad-section">
-        <div class="card ad-placeholder">
-          <h3>Advertisement</h3>
-          <p>Your Ad Here</p>
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-logo">EcoLearn</div>
+            <p class="footer-copyright">EcoLearn | All rights reserved 2025</p>
+            <a href="#" class="btn btn-secondary">About Us</a>
         </div>
-      </aside>
-    </div>
-  </main>
+    </footer>
 
-  <!-- =================================================================== -->
-  <!-- FOOTER                                                              -->
-  <!-- =================================================================== -->
-  <footer class="footer">
-    <div class="container footer-container footer-flex">
-      <div class="footer-logo">EcoLearn</div>
-      <p class="footer-copyright">© EcoLearn | All rights reserved 2025</p>
-      <a href="#" class="btn btn-secondary">About Us</a>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
-
+    <script src="script.js"></script>
 </body>
 </html>
