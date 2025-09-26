@@ -1,9 +1,8 @@
 // ===================================================================
-// CRITICAL SETUP CHECKLIST - **PLEASE READ**
+// CRITICAL SETUP CHECKLIST
 // ===================================================================
 // 1. You MUST paste your unique Firebase config details into section #2 below.
-//    This is the most likely reason the page isn't working correctly.
-// 2. Make sure you are logged in. This script will redirect to login.html if you are not.
+// 2. This script redirects to login.html if no user is logged in.
 // ===================================================================
 
 
@@ -18,12 +17,13 @@ import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10
 // 2. PASTE YOUR FIREBASE CONFIGURATION HERE
 // ===================================================================
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY", // <--- PASTE YOUR KEY HERE
-  authDomain: "YOUR_AUTH_DOMAIN", // <--- AND HERE
-  projectId: "YOUR_PROJECT_ID", // <--- AND HERE
-  storageBucket: "YOUR_STORAGE_BUCKET", // <--- AND HERE
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID", // <--- AND HERE
-  appId: "YOUR_APP_ID" // <--- AND HERE
+  apiKey: "AIzaSyAqNEhChaAs-1x6GK_2D6clsmDRh1e__GA",
+  authDomain: "ecolearn-8f47c.firebaseapp.com",
+  projectId: "ecolearn-8f47c",
+  storageBucket: "ecolearn-8f47c.firebasestorage.app",
+  messagingSenderId: "687303214463",
+  appId: "1:687303214463:web:e8c7b64a72c2e118a4064a",
+  measurementId: "G-41EXNW7W27"
 };
 
 
@@ -41,7 +41,6 @@ const db = getFirestore(app);
 onAuthStateChanged(auth, async (user) => {
   if (user) {
     // User is signed in.
-    console.log("User is authenticated:", user.uid);
     const userDocRef = doc(db, "users", user.uid);
     const userDocSnap = await getDoc(userDocRef);
 
@@ -49,9 +48,9 @@ onAuthStateChanged(auth, async (user) => {
       const userData = userDocSnap.data();
       const name = userData.name;
       
-      // Update the UI with the user's name
       const profileName = document.getElementById('profileName');
       const profileIcon = document.getElementById('profileIcon');
+
       if (profileName) profileName.textContent = name;
       if (profileIcon) profileIcon.textContent = name.charAt(0).toUpperCase();
 
@@ -62,13 +61,13 @@ onAuthStateChanged(auth, async (user) => {
     }
   } else {
     // User is signed out, redirect to login page.
-    console.log("User is not logged in. Redirecting to login.html");
     window.location.href = 'login.html';
   }
 });
 
-// ===================================================================
-// 5. UI EVENT LISTENERS (RUNS AFTER THE PAGE IS LOADED)
+
+// =I==================================================================
+// 5. EVENT LISTENERS FOR UI ELEMENTS
 // ===================================================================
 document.addEventListener('DOMContentLoaded', () => {
     const logoutBtn = document.getElementById('logout-btn');
@@ -99,6 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Pass the selected topic to the levels page ---
     document.querySelectorAll('.topic-btn, .dropdown-menu a').forEach(item => {
         item.addEventListener('click', (event) => {
+            // NOTE: The default link behavior will navigate to levels.html
             const topic = event.target.getAttribute('data-topic');
             if (topic) {
                 sessionStorage.setItem('selectedTopic', topic);
@@ -106,4 +106,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-

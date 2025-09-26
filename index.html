@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EcoLearn | Dashboard</title>
     <!-- Google Fonts Poppins -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis">
+    <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -20,12 +20,12 @@
                 <div class="nav-item dropdown" id="topicsDropdown">
                     <span>Topics</span>
                     <ul class="dropdown-menu">
-                        <li><a href="levels.html?topic=Climate Change" data-topic="Climate Change">Climate Change</a></li>
-                        <li><a href="levels.html?topic=Pollution" data-topic="Pollution">Pollution</a></li>
-                        <li><a href="levels.html?topic=Deforestation" data-topic="Deforestation">Deforestation</a></li>
-                        <li><a href="levels.html?topic=Water Scarcity" data-topic="Water Scarcity">Water Scarcity</a></li>
-                        <li><a href="levels.html?topic=Biodiversity" data-topic="Biodiversity">Biodiversity</a></li>
-                        <li><a href="levels.html?topic=Waste Management" data-topic="Waste Management">Waste Management</a></li>
+                        <li><a href="levels.html" data-topic="Climate Change">Climate Change</a></li>
+                        <li><a href="levels.html" data-topic="Pollution">Pollution</a></li>
+                        <li><a href="levels.html" data-topic="Deforestation">Deforestation</a></li>
+                        <li><a href="levels.html" data-topic="Water Scarcity">Water Scarcity</a></li>
+                        <li><a href="levels.html" data-topic="Biodiversity">Biodiversity</a></li>
+                        <li><a href="levels.html" data-topic="Waste Management">Waste Management</a></li>
                     </ul>
                 </div>
                 <a href="leaderboard.html" class="nav-item">LeaderBoard</a>
@@ -33,9 +33,12 @@
             </nav>
             <div class="nav-right">
                 <div class="nav-profile">
-                    <div class="profile-icon">P</div>
-                    <span><a href="#" style="color:black;">Profile</a></span>
+                    <div class="profile-icon" id="profileIcon">?</div>
+                    <span id="profileName">Loading...</span>
                 </div>
+                 <button id="logout-btn" title="Logout">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+                </button>
             </div>
         </div>
     </header>
@@ -50,22 +53,22 @@
                     <p>Start with a topic below to begin your adventure!</p>
                 </div>
                 <div class="topic-buttons-grid">
-                    <a href="levels.html?topic=Climate Change" class="topic-btn climate-change-btn" data-topic="Climate Change">
+                    <a href="levels.html" class="topic-btn climate-change-btn" data-topic="Climate Change">
                         Climate Change
                     </a>
-                    <a href="levels.html?topic=Pollution" class="topic-btn pollution-btn" data-topic="Pollution">
+                    <a href="levels.html" class="topic-btn pollution-btn" data-topic="Pollution">
                         Pollution
                     </a>
-                    <a href="levels.html?topic=Deforestation" class="topic-btn deforestation-btn" data-topic="Deforestation">
+                    <a href="levels.html" class="topic-btn deforestation-btn" data-topic="Deforestation">
                         Deforestation
                     </a>
-                    <a href="levels.html?topic=Water Scarcity" class="topic-btn water-scarcity-btn" data-topic="Water Scarcity">
+                    <a href="levels.html" class="topic-btn water-scarcity-btn" data-topic="Water Scarcity">
                         Water Scarcity
                     </a>
-                    <a href="levels.html?topic=Biodiversity" class="topic-btn biodiversity-btn" data-topic="Biodiversity">
+                    <a href="levels.html" class="topic-btn biodiversity-btn" data-topic="Biodiversity">
                         Biodiversity
                     </a>
-                    <a href="levels.html?topic=Waste Management" class="topic-btn waste-management-btn" data-topic="Waste Management">
+                    <a href="levels.html" class="topic-btn waste-management-btn" data-topic="Waste Management">
                         Waste Management
                     </a>
                 </div>
@@ -75,7 +78,7 @@
                 <div class="ad-content">
                     <h3>Join the Green Movement!</h3>
                     <p>Learn about environmental challenges and contribute to a sustainable future. Every bit helps!</p>
-                    <button class="join-btn">Sign Up Now</button>
+                    <a href="login.html" class="join-btn">Sign Up Now</a>
                     <a href="about.html" class="more-link">Learn More</a>
                 </div>
             </aside>
@@ -86,11 +89,13 @@
     <footer class="footer">
         <div class="container footer-container">
             <div class="footer-logo">EcoLearn</div>
-            <p class="footer-copyright">EcoLearn | All rights reserved 2025</p>
+            <p class="footer-copyright">© EcoLearn | All rights reserved 2025</p>
             <a href="about.html" class="btn btn-secondary">About Us</a>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- IMPORTANT: The script tag MUST have type="module" -->
+    <script type="module" src="script.js"></script>
 </body>
 </html>
+

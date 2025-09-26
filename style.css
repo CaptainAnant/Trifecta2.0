@@ -79,7 +79,7 @@ flex: 4; /* Main content occupies 80% */
 background: var(--white);
 border-radius: 12px;
 padding: 2rem;
-border: 1px solid var(--border-color);
+border: 1px solid var(--gray-200);
 display: flex;
 flex-direction: column;
 align-items: center;
@@ -113,6 +113,7 @@ color: var(--gray-100);
 }
 
 .join-btn {
+display: inline-block;
 padding: 0.75rem 1.5rem;
 background-color: var(--white);
 color: var(--green-700);
@@ -221,6 +222,12 @@ opacity: 1;
 transform: translateY(0);
 }
 
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
 .nav-profile {
 display: flex;
 align-items: center;
@@ -238,6 +245,19 @@ align-items: center;
 justify-content: center;
 color: var(--white);
 font-weight: 600;
+font-size: 1.2rem;
+}
+
+#logout-btn {
+    color: var(--gray-500);
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+#logout-btn:hover {
+    background-color: var(--gray-100);
+    color: var(--gray-700);
 }
 
 /* MAIN CONTENT BUTTONS */
@@ -273,7 +293,7 @@ color: var(--white);
 text-align: center;
 transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-width: 250px;
+width: 100%;
 height: 150px;
 }
 
@@ -283,52 +303,23 @@ box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 /* Specific button colors and effects */
-.climate-change-btn {
-background-color: #f44336; /* Red */
-}
-.climate-change-btn:hover {
-background-color: #d32f2f;
-}
-
-.pollution-btn {
-background-color: #607d8b; /* Blue-Grey */
-}
-.pollution-btn:hover {
-background-color: #455a64;
-}
-
-.deforestation-btn {
-background-color: #795548; /* Brown */
-}
-.deforestation-btn:hover {
-background-color: #5d4037;
-}
-
-.water-scarcity-btn {
-background-color: #2196f3; /* Blue */
-}
-.water-scarcity-btn:hover {
-background-color: #1976d2;
-}
-
-.biodiversity-btn {
-background-color: #4caf50; /* Green */
-}
-.biodiversity-btn:hover {
-background-color: #388e3c;
-}
-
-.waste-management-btn {
-background-color: #ff9800; /* Orange */
-}
-.waste-management-btn:hover {
-background-color: #f57c00;
-}
+.climate-change-btn { background-color: #f44336; }
+.climate-change-btn:hover { background-color: #d32f2f; }
+.pollution-btn { background-color: #607d8b; }
+.pollution-btn:hover { background-color: #455a64; }
+.deforestation-btn { background-color: #795548; }
+.deforestation-btn:hover { background-color: #5d4037; }
+.water-scarcity-btn { background-color: #2196f3; }
+.water-scarcity-btn:hover { background-color: #1976d2; }
+.biodiversity-btn { background-color: #4caf50; }
+.biodiversity-btn:hover { background-color: #388e3c; }
+.waste-management-btn { background-color: #ff9800; }
+.waste-management-btn:hover { background-color: #f57c00; }
 
 /* FOOTER */
 .footer {
 background-color: var(--white);
-border-top: 1px solid var(--border-color);
+border-top: 1px solid var(--gray-200);
 padding: 1.5rem 0;
 margin-top: auto; /* Push footer to the bottom */
 }
@@ -381,25 +372,26 @@ flex-direction: column;
 padding: 2.5rem;
 }
 .nav-links {
-gap: 0.75rem;
-overflow-x: auto;
-padding-bottom: 5px;
-}
+    display: none; /* Hide nav links by default on smaller screens */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--white);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+    box-shadow: var(--shadow-sm);
+  }
 }
 
 @media (max-width: 768px) {
-.nav-item {
-font-size: 0.9rem;
-white-space: nowrap;
-}
-}
+  #profileName {
+    display: none; /* Hide name on small screens */
+  }
 
-.nav-profile span {
-display: none;
-}
-
-.footer-container {
-display: flex;
-flex-direction: row;
-gap: 1rem;
+  .footer-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
