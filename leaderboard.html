@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Leaderboard</title>
+    <link rel="stylesheet" href="leaderboard.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <h1 class="school-name">Westfield Academy</h1>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="leaderboard">
+                <h2 class="leaderboard-title">
+                    <i class="fas fa-trophy"></i>
+                    Student Leaderboard
+                </h2>
+                
+                <!-- Student Information Table -->
+                <div class="table-container">
+                    <table class="student-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Rank</th>
+                                <th>Points</th>
+                                <th>Badges</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentTableBody">
+                            <!-- Student data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="leaderboard.js"></script>
+</body>
+</html>

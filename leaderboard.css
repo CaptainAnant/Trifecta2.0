@@ -1,0 +1,340 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    min-height: 100vh;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Section */
+.header {
+    background: #AFD88D;
+    border-radius: 15px;
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.school-name {
+    font-size: 3rem;
+    font-weight: 700;
+    color: black;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 2px;
+}
+
+/* Main Content */
+.main-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.leaderboard {
+    background: #E4F3D8;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 900px;
+}
+
+.leaderboard-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: rgba(76, 175, 80, 0.9);
+    margin-bottom: 30px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.leaderboard-title i {
+    color: #ffd700;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Table Styling */
+.table-container {
+    overflow-x: auto;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.student-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.student-table thead {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.9), rgba(69, 160, 73, 0.9));
+}
+
+.student-table th {
+    padding: 20px 15px;
+    text-align: left;
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.student-table tbody tr {
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.student-table tbody tr:nth-child(odd) {
+    background-color: #f8f9ff;
+}
+
+.student-table tbody tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.student-table tbody tr:hover {
+    background-color: rgba(200, 230, 201, 0.7);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.student-table td {
+    padding: 20px 15px;
+    vertical-align: middle;
+}
+
+/* Student Info */
+.student-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.student-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.student-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Rank Styling */
+.rank {
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 8px 16px;
+    border-radius: 25px;
+    display: inline-block;
+    min-width: 60px;
+    text-align: center;
+}
+
+.rank-1 {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    color: #b8860b;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.rank-2 {
+    background: linear-gradient(135deg, #c0c0c0, #e5e5e5);
+    color: #696969;
+    box-shadow: 0 4px 15px rgba(192, 192, 192, 0.3);
+}
+
+.rank-3 {
+    background: linear-gradient(135deg, #cd7f32, #daa520);
+    color: #8b4513;
+    box-shadow: 0 4px 15px rgba(205, 127, 50, 0.3);
+}
+
+/* Points */
+.points {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: rgba(76, 175, 80, 0.9);
+}
+
+/* Badges */
+.badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.badge {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.badge:hover {
+    transform: scale(1.2);
+}
+
+.badge.gold {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+}
+
+.badge.silver {
+    background: linear-gradient(135deg, #c0c0c0, #e5e5e5);
+}
+
+.badge.bronze {
+    background: linear-gradient(135deg, #cd7f32, #daa520);
+}
+
+.badge.blue {
+    background: linear-gradient(135deg, rgba(76, 175, 80, 0.8), rgba(69, 160, 73, 0.8));
+}
+
+.badge.green {
+    background: linear-gradient(135deg, #56ab2f, #a8e6cf);
+}
+
+.badge.purple {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.badge.orange {
+    background: linear-gradient(135deg, #ff6b35, #ff8e35);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    
+    .school-name {
+        font-size: 2rem;
+    }
+    
+    .header {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .leaderboard {
+        padding: 20px;
+        border-radius: 15px;
+    }
+    
+    .leaderboard-title {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+    
+    .student-table th,
+    .student-table td {
+        padding: 12px 8px;
+        font-size: 0.9rem;
+    }
+    
+    .student-info {
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+    }
+    
+    .student-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .badges {
+        justify-content: center;
+    }
+    
+    .badge {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .school-name {
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+    }
+    
+    .leaderboard {
+        padding: 15px;
+    }
+    
+    .student-table th,
+    .student-table td {
+        padding: 10px 5px;
+        font-size: 0.8rem;
+    }
+    
+    .table-container {
+        font-size: 0.85rem;
+    }
+}
+
+/* Loading Animation */
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    font-size: 1.1rem;
+}
+
+.loading::after {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid rgba(76, 175, 80, 0.8);
+    border-radius: 50%;
+    margin-left: 10px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
