@@ -24,20 +24,26 @@
         <div class="nav-item dropdown" id="topicsDropdown">
           <span>Topics</span>
           <ul class="dropdown-menu">
-            <li><a href="levels.html?topic=Climate Change" data-topic="Climate Change">Climate Change</a></li>
-            <li><a href="levels.html?topic=Pollution" data-topic="Pollution">Pollution</a></li>
-            <li><a href="levels.html?topic=Deforestation" data-topic="Deforestation">Deforestation</a></li>
-            <li><a href="levels.html?topic=Water Scarcity" data-topic="Water Scarcity">Water Scarcity</a></li>
-            <li><a href="levels.html?topic=Biodiversity" data-topic="Biodiversity">Biodiversity</a></li>
-            <li><a href="levels.html?topic=Waste Management" data-topic="Waste Management">Waste Management</a></li>
+            <li><a href="levels.html" data-topic="Climate Change">Climate Change</a></li>
+            <li><a href="levels.html" data-topic="Pollution">Pollution</a></li>
+            <li><a href="levels.html" data-topic="Deforestation">Deforestation</a></li>
+            <li><a href="levels.html" data-topic="Water Scarcity">Water Scarcity</a></li>
+            <li><a href="levels.html" data-topic="Biodiversity">Biodiversity</a></li>
+            <li><a href="levels.html" data-topic="Waste Management">Waste Management</a></li>
           </ul>
         </div>
         <a href="leaderboard.html" class="nav-item">LeaderBoard</a>
         <a href="#" class="nav-item">My Badges</a>
       </nav>
-      <div class="nav-profile">
-        <div class="profile-icon">P</div>
-        <span><a href="#">Profile</a></span>
+      <!-- UPDATED PROFILE SECTION -->
+      <div class="nav-right">
+        <div class="nav-profile">
+          <div class="profile-icon" id="profileIcon">?</div>
+          <span id="profileName">Loading...</span>
+        </div>
+        <button id="logout-btn" title="Logout">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+        </button>
       </div>
     </div>
   </header>
@@ -115,7 +121,8 @@
     </div>
   </main>
 
-  <script src="levels.js"></script>
+  <script type="module" src="levels.js"></script>
 </body>
 
 </html>
+
