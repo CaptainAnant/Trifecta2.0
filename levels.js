@@ -28,3 +28,5 @@ document.addEventListener('click', (event) => {
 
 }
 };
+
+// This is a comment
