@@ -1,5 +1,89 @@
-// Topics Dropdown Toggle (for navbar consistency)
+// ===================================================================
+// CRITICAL SETUP CHECKLIST
+// ===================================================================
+// 1. You MUST paste your unique Firebase config details into section #2 below.
+// 2. Make sure you are logged in. This script will redirect to login.html if you are not.
+// ===================================================================
+
+
+// ===================================================================
+// 1. FIREBASE SDK IMPORTS
+// ===================================================================
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+// ===================================================================
+// 2. PASTE YOUR FIREBASE CONFIGURATION HERE
+// ===================================================================
+const firebaseConfig = {
+  apiKey: "AIzaSyAqNEhChaAs-1x6GK_2D6clsmDRh1e__GA",
+  authDomain: "ecolearn-8f47c.firebaseapp.com",
+  projectId: "ecolearn-8f47c",
+  storageBucket: "ecolearn-8f47c.firebasestorage.app",
+  messagingSenderId: "687303214463",
+  appId: "1:687303214463:web:e8c7b64a72c2e118a4064a",
+  measurementId: "G-41EXNW7W27"
+};
+
+
+// ===================================================================
+// 3. INITIALIZE FIREBASE & GET REFERENCES
+// ===================================================================
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+
+// ===================================================================
+// 4. DOM ELEMENT REFERENCES
+// ===================================================================
+const profileName = document.getElementById('profileName');
+const profileIcon = document.getElementById('profileIcon');
+const logoutBtn = document.getElementById('logout-btn');
 const topicsDropdown = document.getElementById('topicsDropdown');
+const topicTitle = document.getElementById('topicTitle');
+
+
+// ===================================================================
+// 5. AUTHENTICATION STATE & DATA FETCHING
+// ===================================================================
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    // User is signed in, fetch their data
+    const userDocRef = doc(db, "users", user.uid);
+    const userDocSnap = await getDoc(userDocRef);
+
+    if (userDocSnap.exists()) {
+      const userData = userDocSnap.data();
+      const name = userData.name;
+      
+      // Update the UI with the user's name
+      if (profileName) profileName.textContent = name;
+      if (profileIcon) profileIcon.textContent = name.charAt(0).toUpperCase();
+    } else {
+      console.error("No such user document!");
+      if (profileName) profileName.textContent = "User";
+    }
+  } else {
+    // User is signed out, redirect to login page
+    window.location.href = 'login.html';
+  }
+});
+
+
+// ===================================================================
+// 6. UI LOGIC & EVENT LISTENERS
+// ===================================================================
+
+// Logout Functionality
+if (logoutBtn) {
+    logoutBtn.addEventListener('click', () => {
+        signOut(auth).catch((error) => console.error("Sign out error:", error));
+    });
+}
+
+// Topics Dropdown Toggle
 if (topicsDropdown) {
   topicsDropdown.addEventListener('click', (event) => {
     event.stopPropagation();
@@ -13,79 +97,27 @@ if (topicsDropdown) {
   });
 }
 
-// Locked Level Hover and Click Behavior
-const lockedLevel = document.querySelector('.level-node.locked');
-const lockedPopup = document.getElementById('lockedPopup');
-const closePopup = document.getElementById('closePopup');
-
-if (lockedLevel) {
-  // Show tooltip on hover
-  lockedLevel.addEventListener('mouseenter', () => {
-    const tooltip = document.createElement('div');
-    tooltip.className = 'tooltip';
-    tooltip.textContent = lockedLevel.dataset.tooltip;
-    document.body.appendChild(tooltip);
-    const rect = lockedLevel.getBoundingClientRect();
-    tooltip.style.left = `${rect.left + rect.width / 2 - tooltip.offsetWidth / 2}px`;
-    tooltip.style.top = `${rect.top - tooltip.offsetHeight - 10}px`;
-  });
-
-  lockedLevel.addEventListener('mouseleave', () => {
-    const tooltip = document.querySelector('.tooltip');
-    if (tooltip) {
-      tooltip.remove();
-    }
-  });
-
-  // Show pop-up on click
-  lockedLevel.addEventListener('click', (event) => {
-    event.preventDefault();
-    lockedPopup.classList.remove('hidden');
-  });
-}
-
-// Close pop-up
-if (closePopup) {
-  closePopup.addEventListener('click', () => {
-    lockedPopup.classList.add('hidden');
-  });
-}
-
-// Add blur effect to navbar on scroll
-const navbar = document.querySelector('.navbar');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 10) {
-    navbar.classList.add('scrolled');
-  } else {
-    navbar.classList.remove('scrolled');
-  }
-});
-
-// Update page-header container with selected topic
-const topicTitle = document.getElementById('topicTitle');
-const topicLinks = document.querySelectorAll('.dropdown-menu a');
-
-// Function to update the topic title
-function updateTopicTitle(topic) {
-  if (topic && topicTitle) {
-    topicTitle.textContent = topic;
-  }
-}
-
-// Check for a topic in sessionStorage on page load
+// Update page-header container with selected topic from either URL or sessionStorage
 document.addEventListener('DOMContentLoaded', () => {
-  const selectedTopic = sessionStorage.getItem('selectedTopic');
-  updateTopicTitle(selectedTopic);
+    const params = new URLSearchParams(window.location.search);
+    const topicFromURL = params.get('topic');
+    const topicFromStorage = sessionStorage.getItem('selectedTopic');
+    const currentTopic = topicFromURL || topicFromStorage;
+
+    if (currentTopic && topicTitle) {
+        topicTitle.textContent = currentTopic;
+    } else if (topicTitle) {
+        topicTitle.textContent = 'Select a Topic';
+    }
 });
 
-// Update topic title when a link is clicked
-topicLinks.forEach(link => {
-  link.addEventListener('click', (event) => {
-    event.preventDefault();
-    const selectedTopic = link.getAttribute('data-topic');
-    updateTopicTitle(selectedTopic);
-    // Optional: Navigate to the correct page after setting the title
-    // This is already handled by the href in the HTML, but this ensures consistency
-    window.location.href = link.getAttribute('href');
-  });
+// Save topic to sessionStorage when any topic link is clicked
+document.querySelectorAll('.dropdown-menu a, .topic-btn').forEach(link => {
+    link.addEventListener('click', (event) => {
+        const selectedTopic = link.getAttribute('data-topic');
+        if (selectedTopic) {
+            sessionStorage.setItem('selectedTopic', selectedTopic);
+        }
+    });
 });
+

@@ -9,6 +9,9 @@
     --grass-color: #556B2F;
     --text-dark: #333333;
     --text-light: #6c757d;
+    --gray-100: #f3f4f6;
+    --gray-500: #6b7280;
+    --gray-700: #374151;
     --locked-color: #a0aec0;
     --shadow-sm: 0 4px 6px 1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
     --shadow-md: 0 10px 15px 3px rgba(0, 0, 0, 0.2), 0 4px 6px 2px rgba(0, 0, 0, 0.1);
@@ -123,6 +126,12 @@ a {
     transform: translateY(0);
 }
 
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
 .nav-profile {
     display: flex;
     align-items: center;
@@ -140,7 +149,27 @@ a {
     justify-content: center;
     color: var(--white);
     font-weight: 600;
+    font-size: 1.2rem;
 }
+
+#logout-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--gray-500);
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+#logout-btn:hover {
+    background-color: var(--gray-100);
+    color: var(--gray-700);
+}
+
 
 /* 3. MAIN LEVEL MAP SECTION */
 .main-section {
@@ -324,30 +353,6 @@ a {
     z-index: 3;
 }
 
-/* 4. FOOTER (Consistent with index.html) */
-.footer {
-    background-color: var(--white);
-    border-top: 1px solid var(--border-color);
-    padding: 1.5rem 0;
-}
-
-.footer-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.footer-logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #3FAA7E;
-}
-
-.footer-copyright {
-    color: var(--text-light);
-}
-
-
 /*Game icon styles*/
 .material-symbols-outlined {
     font-variation-settings:
@@ -358,7 +363,6 @@ a {
 }
 
 .game-icon:hover {
-    /* color: var(--white); */
     transform: scale(1.7);
     transition: transform 0.2s ease;
 }
@@ -379,13 +383,8 @@ a {
         white-space: nowrap;
     }
 
-    .nav-profile span {
+    #profileName {
         display: none;
-    }
-
-    .footer-container {
-        flex-direction: column;
-        gap: 1rem;
     }
 
     .page-header h1 {
@@ -400,3 +399,4 @@ a {
         margin-top: -50px;
     }
 }
+
