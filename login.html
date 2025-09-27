@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="login.css">
   <!-- Google Fonts - Poppins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
@@ -39,21 +39,11 @@
         
         <!-- Form -->
         <form id="authForm">
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input class="form-input" type="email" id="email" placeholder="your.email@school.edu" required>
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input class="form-input" type="password" id="password" placeholder="Enter your password" required>
-          </div>
-          <button type="submit" class="submit-btn">
-            <span class="material-symbols-outlined">eco</span> Log In
-          </button>
+          <!-- Dynamically loaded by JS -->
         </form>
 
         <p class="card-footer-text" id="authFooter">
-          Don't have an account? <a href="#" id="toggleToSignUp">Join EcoLearn</a>
+          <!-- Dynamically loaded by JS -->
         </p>
 
         <p class="card-footer-text" id="adminLogin">
@@ -63,9 +53,7 @@
     </div>
   </div>
   
-  <!-- ** THE FIX IS HERE ** -->
-  <!-- The script tag now includes type="module" which is required for Firebase imports -->
+  <!-- THIS IS THE FIX: The script tag MUST have type="module" -->
   <script type="module" src="login.js"></script>
-
 </body>
 </html>
