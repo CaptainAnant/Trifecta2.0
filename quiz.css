@@ -1,0 +1,252 @@
+:root {
+    --color-dark-bg: #1e392a;     /* Deep Forest Green/Dark */
+    --color-module-bg: #2d573f;   /* Medium Sage Green */
+    --color-accent-green: #a8e6cf; /* Light Mint Green (Primary Highlight) */
+    --color-text-light: #f0f8ff;  /* Off-White */
+    --color-correct: #4ade80;     /* Bright Success Green */
+    --color-incorrect: #f87171;   /* Soft Red for error */
+}
+
+/* General Setup and Vibe */
+body {
+    font-family: 'Montserrat', sans-serif; /* Clean, modern font */
+    background-color: var(--color-dark-bg);
+    color: var(--color-text-light);
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+    background-image: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse"><path d="M 30 0 L 0 0 0 30" fill="none" stroke="%233e604f" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)" /></svg>');
+}
+
+/* Header and Score */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding: 15px 30px;
+    background-color: var(--color-module-bg);
+    border-left: 8px solid var(--color-accent-green);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+}
+
+.game-title {
+    font-family: 'Bangers', cursive; /* Keeping a slight game accent here */
+    color: var(--color-accent-green);
+    text-shadow: 2px 2px #000000;
+    font-size: 2.2em;
+    margin: 0;
+}
+
+.score-card {
+    background-color: #274735; /* Darker green background */
+    color: var(--color-text-light);
+    padding: 10px 15px;
+    border: 1px solid var(--color-accent-green);
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+.score-label {
+    display: block;
+    font-size: 0.8em;
+    color: var(--color-accent-green);
+    margin-bottom: 2px;
+}
+
+.content-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+/* Question Module Styling */
+.question-module {
+    background-color: var(--color-module-bg);
+    border: 1px solid #3e604f;
+    padding: 25px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+.module-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.4em;
+    font-weight: 700;
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--color-accent-green);
+    color: var(--color-accent-green);
+}
+
+.question-text {
+    font-size: 1.1em;
+    margin: 20px 0;
+    color: var(--color-text-light);
+}
+
+.follow-up-q {
+    color: var(--color-accent-green);
+    font-weight: bold;
+}
+
+/* Options/Button Styling */
+.options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.option {
+    background-color: #3e604f; /* Subtle option background */
+    color: white;
+    border: 2px solid #5a8a65;
+    padding: 12px;
+    text-align: left;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.option:hover:not(:disabled) {
+    background-color: #5a8a65;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Feedback Styling */
+.correct-answer {
+    background-color: var(--color-correct) !important;
+    border-color: #1e392a !important;
+    color: black !important;
+    font-weight: bold;
+}
+
+.incorrect-answer {
+    background-color: var(--color-incorrect) !important;
+    border-color: #1e392a !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+/* Reasoning Box Styling */
+.reasoning-box {
+    background-color: #274735;
+    border-left: 5px solid var(--color-accent-green);
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 0 5px 5px 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.95em;
+    color: var(--color-text-light);
+}
+
+.hidden {
+    display: none;
+}
+
+/* Media Placeholders */
+.video-placeholder, .image-placeholder {
+    height: 200px;
+    background-color: #1a3024;
+    border: 2px dashed var(--color-accent-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px 0;
+    color: var(--color-accent-green);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1em;
+    text-align: center;
+    border-radius: 5px;
+}
+
+hr {
+    border: none;
+    border-top: 2px dashed #3e604f;
+    margin: 30px 0;
+}
+
+/* Manual Mission Status Button */
+.mission-status-container {
+    text-align: center;
+    margin-top: 40px;
+}
+
+#show-score-btn {
+    background-color: var(--color-accent-green);
+    color: var(--color-dark-bg);
+    border: none;
+    padding: 15px 30px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.1em;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.1s;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+#show-score-btn:hover {
+    background-color: #7ecc9c;
+    transform: translateY(-2px);
+}
+
+
+/* Modal Styling (Cleaned up, no intense pulse) */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: var(--color-module-bg);
+    border: 3px solid var(--color-accent-green);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 25px rgba(168, 230, 207, 0.5);
+}
+
+#modal-title {
+    color: var(--color-correct);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8em;
+}
+
+#final-score-text {
+    font-size: 1.2em;
+    font-family: 'Montserrat', sans-serif;
+    margin: 15px 0;
+}
+
+#next-level-btn {
+    background-color: #5a8a65;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;
+    margin-top: 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+#next-level-btn:hover {
+    background-color: #3e604f;
+}
